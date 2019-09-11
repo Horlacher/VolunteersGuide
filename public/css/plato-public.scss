@@ -1,0 +1,20 @@
+//@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+.plato-button {
+	font-size: 24px;
+	color: #fff;
+	background-color: #313131;
+	padding: 6px 12px 6px 12px;
+	border-width: 1px;
+	border-color: #313131;
+	border-style: solid;
+	border-radius: 10px;
+}
+
+.plato-button:hover {
+	color: #fff;
+	background-color: #595959;
+	box-shadow: 3px 3px 1px 1px #ccc;
+	transition: all 0.2s ease;
+	text-decoration: none;
+}

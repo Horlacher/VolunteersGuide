@@ -1,0 +1,38 @@
+{
+  "name": "wp-plugin-plato",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "grunt-po2mo": "^0.1.2",
+    "grunt-pot": "^0.3.0",
+    "grunt-wp-i18n": "^1.0.3",
+    "jvectormap-next": "^3.0.0"
+  },
+  "devDependencies": {
+    "css-loader": "^2.1.1",
+    "grunt": "^1.0.4",
+    "grunt-available-tasks": "^0.6.3",
+    "grunt-check-dependencies": "^1.0.0",
+    "grunt-checkwpversion": "^0.3.0",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-compress": "^1.4.3",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^3.0.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^4.0.1",
+    "grunt-mkdir": "^1.0.0",
+    "grunt-shell": "^3.0.1",
+    "grunt-webpack": "^3.1.3",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.6",
+    "webpack-dev-server": "^3.2.1"
+  }
+}
