@@ -88,6 +88,13 @@ class PublicHandler
 	 */
 	public function enqueueScripts()
 	{
+		wp_enqueue_script(
+			$this->pluginName,
+			plugin_dir_url(__FILE__) . 'js/plato-public.min.js',
+			['jquery',],
+			$this->version,
+			false
+		);
 	}
 
 	public function shortcode_projectButton($atts = [], $content = null)
@@ -123,6 +130,39 @@ class PublicHandler
 
 	public function shortcode_worldMap()
 	{
+		wp_enqueue_script(
+			$this->pluginName . '-platoMap',
+			plugin_dir_url(__FILE__) . 'js/plato-worldMap.min.js',
+			['jquery',],
+			$this->version,
+			false
+		);
+		$demovoxJsArr = [
+			'language'          => Infos::getUserLanguage(),
+			'ajaxUrl'           => admin_url('admin-ajax.php'),
+			'nonce'             => Core::createNonce($this->nonceId),
+			'apiAddressEnabled' => '',
+		];
+		wp_localize_script($this->pluginName, 'platoMap', $demovoxJsArr);
+		wp_add_inline_script(
+			$this->pluginName . '-platoMap',
+			'jQuery(function(){
+  jQuery(\'#world-map-gdp\').vectorMap({
+    map: \'world_mill\',
+    series: {
+      regions: [{
+        values: gdpData,
+        scale: [\'#C8EEFF\', \'#0071A4\'],
+        normalizeFunction: \'polynomial\'
+      }]
+    },
+    onRegionTipShow: function(e, el, code){
+      el.html(el.html()+\' (GDP - \'+gdpData[code]+\')\');
+    }
+  });
+});'
+		);
+
 		ob_start();
 		$platoOrgID = Config::getValue('platoOrgID');
 

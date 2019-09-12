@@ -1,8 +1,9 @@
 const path = require('path');
 
 module.exports = {
-	entry:{
-		public: ['./public/js/plato-public.js', './node_modules/jvectormap-next/jquery-jvectormap.min.js'],
+	entry: {
+		public: ['./public/js/plato-public.js',],
+		worldMap: ['./node_modules/jvectormap-next/jquery-jvectormap.min.js',],
 	},
 	output: {
 		path: path.resolve(__dirname + '/public/js'),
