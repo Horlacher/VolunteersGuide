@@ -146,7 +146,13 @@ class PublicHandler
 		wp_localize_script($this->pluginName, 'platoMap', $demovoxJsArr);
 		wp_add_inline_script(
 			$this->pluginName . '-platoMap',
-			'jQuery(function(){
+			'
+  var gdpData = {
+    "AF": 16.63,
+    "AL": 11.58,
+    "DZ": 158.97,
+  };
+  jQuery(function(){
   jQuery(\'#world-map-gdp\').vectorMap({
     map: \'world_mill\',
     series: {
