@@ -18,3 +18,17 @@
 	transition: all 0.2s ease;
 	text-decoration: none;
 }
+
+#world-map, #world-map .jvectormap-container svg {
+	width: 100%;
+	height: 550px;
+}
+
+.jvectormap-container {
+	background-color: white !important;
+}
+
+.jvectormap-zoomin, .jvectormap-zoomout {
+	width: 12px;
+	height: 12px;
+}
