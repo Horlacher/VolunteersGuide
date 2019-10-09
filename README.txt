@@ -1,7 +1,7 @@
 === plato ===
 Contributors: horlacher
 Donate link: https://github.com/horlacher/wp-plugin-plato
-Tags: initiative, referendum, switzerland, collect, signature, signatures, online
+Tags: Plato, Map
 Requires at least: 4.9
 Tested up to: 5.2
 Stable tag: 1.0
@@ -13,7 +13,7 @@ plato
 
 == Description ==
 = Open =
-Plato is the first truly open Wordpress integration plugin for PLATO.
+Plato is the Wordpress integration plugin built for PLATO.
 PLATO is the official PLAcement TOol for The Alliance.
 
 == Screenshots ==
@@ -21,13 +21,11 @@ PLATO is the official PLAcement TOol for The Alliance.
 
 == Frequently Asked Questions ==
 = Do you provide support to run this plugin? =
-No
+Please write bug reports on GitHub
 
 == Requirements ==
 * PHP 7
 * WordPress
-* SSL certificate for HTTPS (unsecure connection is not allowed)
-* Optional feature requires the PHP modules "GMP" or "BC Math"
 
 == Installation ==
 1. Upload directory `plato` to the Wordpress Plugin directory (/wp-content/plugins/)
