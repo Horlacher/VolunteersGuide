@@ -4,8 +4,6 @@
  */
 ?>
 
-Map
-
 <div id="world-map"></div>
 <script>
 	jQuery(document).ready(function ($) {
