@@ -99,6 +99,7 @@ class PublicHandler
 
 	public function shortcode_projectButton($atts = [], $content = null)
 	{
+		$this->enqueueStyles();
 		// normalize attribute keys, lowercase
 		$atts = array_change_key_case((array)$atts, CASE_LOWER);
 		if (!isset($atts['code'])) {
