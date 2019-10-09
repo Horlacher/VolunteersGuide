@@ -1,5 +1,4 @@
-const webpackPubConfig = require('./webpack.config'),
-	pubCss = './public/css/',
+const pubCss = './public/css/',
 	pubJs = './public/js/',
 	adminCss = './admin/css/',
 	adminJs = './admin/js/',
@@ -73,13 +72,6 @@ module.exports = function (grunt) {
 		},
 		checkDependencies: {
 			this: {},
-		},
-		webpack: {
-			options: {
-				stats: !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
-			},
-			prod: webpackPubConfig,
-			dev: Object.assign({watch: true}, webpackPubConfig),
 		},
 		uglify: {
 			admin: {
@@ -169,7 +161,6 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-available-tasks');
 	grunt.loadNpmTasks('grunt-check-dependencies');
 
-	grunt.loadNpmTasks('grunt-webpack');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -185,7 +176,7 @@ module.exports = function (grunt) {
 	// define Tasks
 	grunt.registerTask('default', 'availabletasks');
 	grunt.registerTask('buildAssets', [
-		'checkDependencies', 'clean', 'webpack:prod', 'copy:adminAssets', 'uglify', 'sass', 'cssmin', 'po2mo',
+		'checkDependencies', 'clean', 'copy:adminAssets', 'uglify', 'sass', 'cssmin', 'po2mo',
 	]);
 	grunt.registerTask('build', [
 		'buildAssets', 'mkdir:build', 'copy:buildDir', 'clean:buildComposer',
