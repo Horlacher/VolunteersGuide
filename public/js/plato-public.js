@@ -2,12 +2,12 @@ var continentsZoom = {
 	'AF': {
 		x: 0.5,
 		y: 0.65,
-		scale: 3,
+		scale: 2,
 	},
 	'NA': {
 		x: 0.1,
 		y: 0.37,
-		scale: 3,
+		scale: 2,
 	},
 	/*
 	'OC':{
@@ -19,17 +19,17 @@ var continentsZoom = {
 	'AS': {
 		x: 0.7,
 		y: 0.48,
-		scale: 3,
+		scale: 2,
 	},
 	'EU': {
 		x: 0.55,
 		y: 0.1,
-		scale: 3,
+		scale: 2,
 	},
 	'SA': {
 		x: 0.3,
 		y: 0.8,
-		scale: 3,
+		scale: 2,
 	},
 };
 var continentsColors = {
