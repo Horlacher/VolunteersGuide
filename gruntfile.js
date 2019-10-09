@@ -77,7 +77,13 @@ module.exports = function (grunt) {
 			admin: {
 				files: {
 					[adminJs + 'plato-admin.min.js']: [adminJs + 'plato-admin.js',],
-					// [pubJs + 'plato-public.min.js']: [pubJs + 'plato-admin.js', 'node_modules/jvectormap-next/jquery-jvectormap.min.js',]
+					[pubJs + 'plato-public.min.js']: [
+						'./node_modules/jvectormap-next/jquery-jvectormap.min.js',
+						pubJs + 'jquery-jvectormap-continents-mill-en.js',
+						pubJs + 'jquery-jvectormap-world-mill-en.js',
+						pubJs + 'countries.js',
+						pubJs + 'plato-public.js',
+					]
 				}
 			}
 		},
@@ -99,7 +105,10 @@ module.exports = function (grunt) {
 			},
 			target: {
 				files: {
-					[pubCss + 'plato-public.min.css']: pubCss + 'plato-public.css',
+					[pubCss + 'plato-public.min.css']: [
+						'./node_modules/jvectormap-next/jquery-jvectormap.css',
+						pubCss + 'plato-public.css',
+					],
 					[adminCss + 'plato-admin.min.css']: adminCss + 'plato-admin.css',
 				}
 			}

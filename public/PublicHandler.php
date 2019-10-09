@@ -130,13 +130,8 @@ class PublicHandler
 
 	public function shortcode_worldMap()
 	{
-		wp_enqueue_script(
-			$this->pluginName . '-platoMap',
-			plugin_dir_url(__FILE__) . 'js/plato-worldMap.min.js',
-			['jquery',],
-			$this->version,
-			false
-		);
+		$this->enqueueStyles();
+		$this->enqueueScripts();
 		$demovoxJsArr = [
 			'language'          => Infos::getUserLanguage(),
 			'ajaxUrl'           => admin_url('admin-ajax.php'),
@@ -144,30 +139,6 @@ class PublicHandler
 			'apiAddressEnabled' => '',
 		];
 		wp_localize_script($this->pluginName, 'platoMap', $demovoxJsArr);
-		wp_add_inline_script(
-			$this->pluginName . '-platoMap',
-			'
-  var gdpData = {
-    "AF": 16.63,
-    "AL": 11.58,
-    "DZ": 158.97,
-  };
-  jQuery(function(){
-  jQuery(\'#world-map-gdp\').vectorMap({
-    map: \'world_mill\',
-    series: {
-      regions: [{
-        values: gdpData,
-        scale: [\'#C8EEFF\', \'#0071A4\'],
-        normalizeFunction: \'polynomial\'
-      }]
-    },
-    onRegionTipShow: function(e, el, code){
-      el.html(el.html()+\' (GDP - \'+gdpData[code]+\')\');
-    }
-  });
-});'
-		);
 
 		ob_start();
 		$platoOrgID = Config::getValue('platoOrgID');
