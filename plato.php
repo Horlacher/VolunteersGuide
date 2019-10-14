@@ -17,7 +17,7 @@ namespace Plato;
  * @wordpress-plugin
  * Plugin Name:       PLATO integration
  * Plugin URI:        https://github.com/horlacher/wp-plugin-plato
- * Description:       Integration for PLATO into your Wordpress page. PLATO is the official PLAcement TOol for The Alliance.
+ * Description:       Integrate PLATO (workcamp-plato.org) into a Wordpress page. Requires an Alliance membership and your PLATO ID to be of use.
  * Version:           1.0.0
  * Author:            Fabian Horlacher
  * Author URI:        https://www.horlacher.be/

@@ -1,4 +1,4 @@
-=== plato ===
+=== PLATO integration ===
 Contributors: horlacher
 Donate link: https://github.com/horlacher/wp-plugin-plato
 Tags: Plato, Map
@@ -9,26 +9,35 @@ Requires PHP: 7.0.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
-plato
+PLATO integration
 
 == Description ==
-= Open =
-Plato is the Wordpress integration plugin built for PLATO.
-PLATO is the official PLAcement TOol for The Alliance.
+Integrates [PLATO](https://workcamp-plato.org/) features into a Wordpress page.
+Requires an Alliance membership and your PLATO ID to be of use.
+PLATO is the official PLAcement TOol for [The Alliance](http://www.alliance-network.eu/).
+
+= Features =
+* Integrate the PLATO search form as an iFrame [plato_searchform]
+* World map which links countries to its workcamp list on PLATO [plato_worldmap]
+* Create button to apply for a certain project on PLATO [plato_projectbutton code="projectcode"]
 
 == Screenshots ==
-1. Example of a plato installation on workcamp.ch
+1. Example of the world map feature on workcamp.ch
 
 == Frequently Asked Questions ==
-= Do you provide support to run this plugin? =
-Please write bug reports on GitHub
+= I've found a bug, what can I do? =
+Please report bugs on [GitHub](https://github.com/horlacher/wp-plugin-plato)
+= I want a new feature, what can I do? =
+Please send me a pull request on [GitHub](https://github.com/horlacher/wp-plugin-plato).
+= Are you related to PLATO? =
+No, this plugin is developed independently. This plugin was initially built for the swiss Alliance member [Workcamp Switzerland](https://www.workcamp.ch), but is now available for .
 
 == Requirements ==
 * PHP 7
 * WordPress
 
 == Installation ==
-1. Upload directory `plato` to the Wordpress Plugin directory (/wp-content/plugins/)
+1. Upload directory `plato-integration` to the Wordpress Plugin directory (/wp-content/plugins/)
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Configure the plugin in WordPress admin
 4. Place shortcodes on pages
