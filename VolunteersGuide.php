@@ -17,7 +17,7 @@ namespace VolunteersGuide;
  * @wordpress-plugin
  * Plugin Name:       The Volunteer's Guide
  * Plugin URI:        https://github.com/Horlacher/VolunteersGuide
- * Description:       Integrate PLATO (workcamp-plato.org) into a Wordpress page. Requires an Alliance membership and your PLATO ID to be of use.
+ * Description:       Helps volunteers to find an international workcamp of the Alliance network directly on your WordPress website.
  * Version:           1.0.0
  * Author:            Fabian Horlacher
  * Author URI:        https://www.horlacher.be/
