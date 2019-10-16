@@ -1,17 +1,17 @@
 <?php
 
-namespace Plato;
+namespace VolunteersGuide;
 
 class ConfigVars
 {
 	static public $sections = [
 		'base'             => [
 			'title' => 'Base settings',
-			'page'  => 'platoSettings',
+			'page'  => 'voluGSettings',
 		],
 		'enabledLanguages' => [
 			'title' => 'Enabled languages',
-			'page'  => 'platoSettings2',
+			'page'  => 'voluGSettings2',
 		],
 	];
 	static public $fields = [
@@ -44,7 +44,7 @@ class ConfigVars
 			'label'        => 'Project button - default text',
 			'section'      => 'base',
 			'type'         => 'text',
-			'default'      => __('Apply now!'),
+			'default'      => __('Apply here!', 'voluG'),
 			'supplemental' => 'If you don\'t specify a label for a project button, this text will be used',
 		];
 		return $fields;

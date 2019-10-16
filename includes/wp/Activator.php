@@ -1,15 +1,15 @@
 <?php
 
-namespace Plato;
+namespace VolunteersGuide;
 
 /**
  * Fired during plugin activation
  *
- * @link       https://github.com/horlacher/wp-plugin-plato
+ * @link       https://github.com/Horlacher/VolunteersGuide
  * @since      1.0.0
  *
- * @package    Plato
- * @subpackage Plato/includes
+ * @package    VolunteersGuide
+ * @subpackage VolunteersGuide/includes
  */
 
 /**
@@ -18,8 +18,8 @@ namespace Plato;
  * This class defines all code necessary to run during the plugin's activation.
  *
  * @since      1.0.0
- * @package    Plato
- * @subpackage Plato/includes
+ * @package    VolunteersGuide
+ * @subpackage VolunteersGuide/includes
  * @author     Fabian Horlacher
  */
 class Activator

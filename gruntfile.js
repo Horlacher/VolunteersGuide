@@ -2,8 +2,7 @@ const pubCss = './public/css/',
 	pubJs = './public/js/',
 	adminCss = './admin/css/',
 	adminJs = './admin/js/',
-	buildComposer = './build/libs/composer/',
-	buildCountryList = buildComposer + 'umpirsky/country-list/data/';
+	buildComposer = './build/libs/composer/';
 
 module.exports = function (grunt) {
 	grunt.initConfig({
@@ -76,13 +75,13 @@ module.exports = function (grunt) {
 		uglify: {
 			admin: {
 				files: {
-					[adminJs + 'plato-admin.min.js']: [adminJs + 'plato-admin.js',],
-					[pubJs + 'plato-public.min.js']: [
+					[adminJs + 'voluG-admin.min.js']: [adminJs + 'voluG-admin.js',],
+					[pubJs + 'voluG-public.min.js']: [
 						'./node_modules/jvectormap-next/jquery-jvectormap.min.js',
 						pubJs + 'jquery-jvectormap-continents-mill-en.js',
 						pubJs + 'jquery-jvectormap-world-mill-en.js',
 						pubJs + 'countries.js',
-						pubJs + 'plato-public.js',
+						pubJs + 'voluG-public.js',
 					]
 				}
 			}
@@ -93,8 +92,8 @@ module.exports = function (grunt) {
 					style: 'expanded'
 				},
 				files: {
-					[pubCss + 'plato-public.css']: pubCss + 'plato-public.scss',
-					[adminCss + 'plato-admin.css']: adminCss + 'plato-admin.scss',
+					[pubCss + 'voluG-public.css']: pubCss + 'voluG-public.scss',
+					[adminCss + 'voluG-admin.css']: adminCss + 'voluG-admin.scss',
 				},
 			}
 		},
@@ -105,22 +104,22 @@ module.exports = function (grunt) {
 			},
 			target: {
 				files: {
-					[pubCss + 'plato-public.min.css']: [
+					[pubCss + 'voluG-public.min.css']: [
 						'./node_modules/jvectormap-next/jquery-jvectormap.css',
-						pubCss + 'plato-public.css',
+						pubCss + 'voluG-public.css',
 					],
-					[adminCss + 'plato-admin.min.css']: adminCss + 'plato-admin.css',
+					[adminCss + 'voluG-admin.min.css']: adminCss + 'voluG-admin.css',
 				}
 			}
 		},
 		compress: {
 			main: {
 				options: {
-					archive: '../plato.zip'
+					archive: '../VolunteersGuide.zip'
 					/*
 					archive: function () {
 						// The global value git.tag is set by another task
-						return 'plato-' + git.tag + '.zip'
+						return 'voluG-' + git.tag + '.zip'
 					}
 					*/
 				},
@@ -133,22 +132,17 @@ module.exports = function (grunt) {
 		clean: {
 			build: ['build/',],
 			buildComposer: [
-				buildCountryList + '*_*',
-				buildCountryList + '*/*.csv', buildCountryList + '*/*.html',
-				buildCountryList + '*/*.sql', buildCountryList + '*/*.txt',
-				buildCountryList + '*/*.xliff', buildCountryList + '*/*.xml',
-				buildCountryList + '*/*.yaml',
 				buildComposer + 'defuse/php-encryption/docs',
 			],
 			buildWpOrg: ['buildWpOrg/',],
 			public: [pubCss + '*.css', pubCss + '*.map', pubJs + '*.min.js', pubJs + '*.map',],
-			admin: [adminCss + '*.css', adminCss + '*.map', adminJs + 'plato-admin.min.js', adminJs + 'Chart.*',],
+			admin: [adminCss + '*.css', adminCss + '*.map', adminJs + 'voluG-admin.min.js', adminJs + 'Chart.*',],
 		},
 		checkwpversion: {
 			options: {
 				//Options specifying location your plug-in's header and readme.txt
 				readme: 'README.txt',
-				plugin: 'plato.php',
+				plugin: 'VolunteersGuide.php',
 			},
 			check: { //Check plug-in version and stable tag match
 				version1: 'plugin',

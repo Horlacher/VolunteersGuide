@@ -1,6 +1,6 @@
 <?php
 
-namespace Plato;
+namespace VolunteersGuide;
 
 /**
  * The file that defines the core plugin class
@@ -8,11 +8,11 @@ namespace Plato;
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @link       https://github.com/horlacher/wp-plugin-plato
+ * @link       https://github.com/Horlacher/VolunteersGuide
  * @since      1.0.0
  *
- * @package    Plato
- * @subpackage Plato/includes
+ * @package    VolunteersGuide
+ * @subpackage VolunteersGuide/includes
  */
 
 /**
@@ -25,8 +25,8 @@ namespace Plato;
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Plato
- * @subpackage Plato/includes
+ * @package    VolunteersGuide
+ * @subpackage VolunteersGuide/includes
  * @author     Fabian Horlacher
  */
 class Core
@@ -71,12 +71,12 @@ class Core
 	 */
 	public function __construct()
 	{
-		if (defined('plato_VERSION')) {
-			$this->version = plato_VERSION;
+		if (defined('volunteersGuide_VERSION')) {
+			$this->version = volunteersGuide_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->pluginName = 'Plato';
+		$this->pluginName = 'VolunteersGuide';
 
 		$this->loadDependencies();
 		$this->setLocale();
@@ -112,12 +112,9 @@ class Core
 		/**
 		 * The helper classes
 		 */
-		// The class responsible for DB access and encryption.
-		require_once $pluginDir . 'includes/helpers/DB.php';
 		require_once $pluginDir . 'includes/helpers/Infos.php';
 		require_once $pluginDir . 'includes/helpers/Strings.php';
 		require_once $pluginDir . 'includes/helpers/Config.php';
-		// The class responsible for sending mails.
 
 		/**
 		 * The class responsible for defining internationalization functionality
@@ -147,7 +144,7 @@ class Core
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the plato_i18n class in order to set the domain and to register the hook
+	 * Uses the i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -236,7 +233,7 @@ class Core
 		return $this->version;
 	}
 
-	private static $optionPrefix = 'plato_';
+	private static $optionPrefix = 'voluG_';
 
 	/**
 	 * @param $id
@@ -334,13 +331,13 @@ class Core
 		}
 		$trace = debug_backtrace();
 		$source = $trace[1];
-		if ($source['function'] == 'showError' && $source['function'] == 'Plato\Core') {
+		if ($source['function'] == 'showError' && $source['function'] == 'VolunteersGuide\Core') {
 			$source = $trace[2];
 		}
 		$date = date('Y-m-d G:i:s', time());
 		$string = $date . ' [' . $level . '] ' . $source['file'] . ':' . $source['line'] . "\n" . $message . "\n";
 
-		$fn = Infos::getPluginDir() . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'debug.plato' . ($type ? '.' . $type : '') . '.php';
+		$fn = Infos::getPluginDir() . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'debug.VolunteersGuide' . ($type ? '.' . $type : '') . '.php';
 		if (!file_exists($fn)) {
 			$string = '<?php exit;' . "\n" . $string;
 		}

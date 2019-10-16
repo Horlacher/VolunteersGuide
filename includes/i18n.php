@@ -1,17 +1,17 @@
 <?php
 
-namespace Plato;
+namespace VolunteersGuide;
 /**
  * Define the internationalization functionality
  *
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @link       https://github.com/horlacher/wp-plugin-plato
+ * @link       https://github.com/Horlacher/VolunteersGuide
  * @since      1.0.0
  *
- * @package    Plato
- * @subpackage Plato/includes
+ * @package    VolunteersGuide
+ * @subpackage VolunteersGuide/includes
  */
 
 /**
@@ -21,8 +21,8 @@ namespace Plato;
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    Plato
- * @subpackage Plato/includes
+ * @package    VolunteersGuide
+ * @subpackage VolunteersGuide/includes
  * @author     Fabian Horlacher
  */
 class i18n
@@ -37,7 +37,7 @@ class i18n
 	public function loadPluginTextdomain()
 	{
 		load_plugin_textdomain(
-			'plato',
+			'voluG',
 			false,
 			dirname(dirname(plugin_basename(__FILE__))) . '/languages/'
 		);

@@ -1,16 +1,10 @@
-# PLATO integration
+# The Volunteer's Guide
 
 We use Github to maintain our Code. If you want to use this WordPress Plugin, install it from the plugin repository in the WordPress backend of your website.
 
 ## Description
 
 Integrates features of PLATO for [The Alliance](http://www.alliance-network.eu/) into a Wordpress page. This plugin is only an integration for PLATO, but not related  
-
-## Donations
-
-This Plugin was developed by the [Socialist Party of Switzerland](https://www.sp-ps.ch).
-
-If you want to use this Plugin for a Swiss Referendum or a Initiative consider a donation at https://demovox.ch
 
 ## Requirements
 
@@ -20,7 +14,7 @@ If you want to use this Plugin for a Swiss Referendum or a Initiative consider a
 
 ## Installation
 
-1. Put `plato-integration` to the Wordpress Plugin directory (/wp-content/plugins/)
+1. Put `VolunteersGuide` to the Wordpress Plugin directory (/wp-content/plugins/)
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Configure the plugin in WordPress admin
 4. Place shortcodes on pages

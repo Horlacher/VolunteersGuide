@@ -1,15 +1,15 @@
 <?php
 
-namespace Plato;
+namespace VolunteersGuide;
 
 /**
  * Fired before plugin uninstall
  *
- * @link       https://github.com/horlacher/wp-plugin-plato
+ * @link       https://github.com/Horlacher/VolunteersGuide
  * @since      1.0.0
  *
- * @package    Plato
- * @subpackage Plato/includes
+ * @package    VolunteersGuide
+ * @subpackage VolunteersGuide/includes
  */
 
 /**
@@ -20,8 +20,8 @@ namespace Plato;
  * https://developer.wordpress.org/plugins/plugin-basics/uninstall-methods/
  *
  * @since      1.0.0
- * @package    Plato
- * @subpackage Plato/includes
+ * @package    VolunteersGuide
+ * @subpackage VolunteersGuide/includes
  * @author     Fabian Horlacher
  */
 class Uninstaller

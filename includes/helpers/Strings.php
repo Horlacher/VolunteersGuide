@@ -1,6 +1,6 @@
 <?php
 
-namespace Plato;
+namespace VolunteersGuide;
 
 class Strings
 {

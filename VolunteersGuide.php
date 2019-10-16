@@ -1,6 +1,6 @@
 <?php
 
-namespace Plato;
+namespace VolunteersGuide;
 
 /**
  * The plugin bootstrap file
@@ -10,21 +10,21 @@ namespace Plato;
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              https://github.com/horlacher/wp-plugin-plato
+ * @link              https://github.com/Horlacher/VolunteersGuide
  * @since             1.0.0
- * @package           Plato
+ * @package           VolunteersGuide
  *
  * @wordpress-plugin
- * Plugin Name:       PLATO integration
- * Plugin URI:        https://github.com/horlacher/wp-plugin-plato
+ * Plugin Name:       The Volunteer's Guide
+ * Plugin URI:        https://github.com/Horlacher/VolunteersGuide
  * Description:       Integrate PLATO (workcamp-plato.org) into a Wordpress page. Requires an Alliance membership and your PLATO ID to be of use.
  * Version:           1.0.0
  * Author:            Fabian Horlacher
  * Author URI:        https://www.horlacher.be/
- * GitHub Plugin URI: https://github.com/horlacher/wp-plugin-plato
+ * GitHub Plugin URI: https://github.com/Horlacher/VolunteersGuide
  * License:           GPLv3
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.en.html
- * Text Domain:       plato
+ * Text Domain:       VolunteersGuide
  * Domain Path:       /languages
  */
 
@@ -38,13 +38,13 @@ if (!defined('WPINC')) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('plato_VERSION', '1.0.0');
+define('volunteersGuide_VERSION', '1.0.0');
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/wp/Activator.php
  */
-function activatePlato()
+function activate()
 {
 	require_once plugin_dir_path(__FILE__) . 'includes/wp/Activator.php';
 	Activator::activate();
@@ -54,7 +54,7 @@ function activatePlato()
  * The code that runs during plugin deactivation.
  * This action is documented in includes/wp/Deactivator.php
  */
-function deactivatePlato()
+function deactivate()
 {
 	require_once plugin_dir_path(__FILE__) . 'includes/wp/Deactivator.php';
 	Deactivator::deactivate();
@@ -64,15 +64,15 @@ function deactivatePlato()
  * The code that runs during plugin uninstall.
  * This action is documented in includes/wp/Deactivator.php
  */
-function uninstallPlato()
+function uninstall()
 {
 	require_once plugin_dir_path(__FILE__) . 'includes/wp/Uninstaller.php';
 	Uninstaller::uninstall();
 }
 
-register_activation_hook(__FILE__, '\Plato\activatePlato');
-register_deactivation_hook(__FILE__, '\Plato\deactivatePlato');
-register_uninstall_hook(__FILE__, '\Plato\uninstallPlato');
+register_activation_hook(__FILE__, '\VolunteersGuide\activate');
+register_deactivation_hook(__FILE__, '\VolunteersGuide\deactivate');
+register_uninstall_hook(__FILE__, '\VolunteersGuide\uninstall');
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -89,11 +89,11 @@ require plugin_dir_path(__FILE__) . 'includes/Core.php';
  *
  * @since    1.0.0
  */
-function runPlato()
+function run()
 {
 
 	$plugin = new Core();
 	$plugin->run();
 }
 
-runPlato();
+run();

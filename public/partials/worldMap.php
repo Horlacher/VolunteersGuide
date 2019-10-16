@@ -11,6 +11,7 @@
 			continent: ['#ffe1cc', '#ff892c'],
 			country:['#fad0b1', '#ff892c'],
 		};
+		// todo: configurable values and colors
 		var enabledCountries = {
 			'CR': {plato: false, url: ''},
 			'DE': {plato: true,},

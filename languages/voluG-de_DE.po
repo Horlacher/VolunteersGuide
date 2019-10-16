@@ -1,14 +1,14 @@
-# Copyright (C) 2019 plato
-# This file is distributed under the same license as the plato package.
+# Copyright (C) 2019 VolunteersGuide
+# This file is distributed under the same license as the VolunteersGuide package.
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: plato 0.0.1\n"
+"Project-Id-Version: VolunteersGuide 0.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/spschweiz/demovox\n"
 "POT-Creation-Date: 2019-02-21 11:16+0100\n"
 "PO-Revision-Date: 2019-02-21 11:16+0100\n"
 "Language-Team: Fabian Horlacher\n"
-"Language: de\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"

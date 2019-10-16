@@ -1,6 +1,6 @@
 <?php
 
-namespace Plato;
+namespace VolunteersGuide;
 
 /**
  * The admin-specific functionality of the plugin.
@@ -8,8 +8,8 @@ namespace Plato;
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    Plato
- * @subpackage Plato/admin
+ * @package    VolunteersGuide
+ * @subpackage VolunteersGuide/admin
  * @author     Fabian Horlacher
  */
 class AdminSettings
@@ -28,7 +28,7 @@ class AdminSettings
 
 	public function pageSettings()
 	{
-		$page = 'platoSettings';
+		$page = 'voluGSettings';
 		include Infos::getPluginDir() . 'admin/partials/settings.php';
 	}
 

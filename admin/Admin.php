@@ -1,14 +1,14 @@
 <?php
 
-namespace Plato;
+namespace VolunteersGuide;
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       https://github.com/horlacher/wp-plugin-plato
+ * @link       https://github.com/Horlacher/VolunteersGuide
  * @since      1.0.0
  *
- * @package    Plato
- * @subpackage Plato/admin
+ * @package    VolunteersGuide
+ * @subpackage VolunteersGuide/admin
  */
 
 /**
@@ -17,8 +17,8 @@ namespace Plato;
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    Plato
- * @subpackage Plato/admin
+ * @package    VolunteersGuide
+ * @subpackage VolunteersGuide/admin
  * @author     Fabian Horlacher
  */
 class Admin
@@ -68,19 +68,7 @@ class Admin
 	 */
 	public function enqueueStyles()
 	{
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_style($this->pluginName, plugin_dir_url(__FILE__) . 'css/plato-admin.min.css', [], $this->version, 'all');
+		wp_enqueue_style($this->pluginName, plugin_dir_url(__FILE__) . 'css/voluG-admin.min.css', [], $this->version, 'all');
 	}
 
 	/**
@@ -90,35 +78,25 @@ class Admin
 	 */
 	public function enqueueScripts()
 	{
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		//wp_enqueue_script($this->pluginName . '_admin', plugin_dir_url(__FILE__) . 'js/plato-admin.min.js', ['jquery'], $this->version, false);
+		/*
+		wp_enqueue_script($this->pluginName . '_admin', plugin_dir_url(__FILE__) . 'js/voluG-admin.min.js', ['jquery'], $this->version, false);
 
 		wp_enqueue_media();
-		$platoJsArr = [
+		$localJsArr = [
 			'uploader' => [
 				'title' => 'Select signature sheet',
 				'text'  => 'Select',
 			],
 		];
-		wp_localize_script($this->pluginName . '_admin', 'platoAdmin', $platoJsArr);
+		wp_localize_script($this->pluginName . '_admin', 'voluGAdmin', $localJsArr);
+		*/
 	}
 
 	public function setupAdminAjaxActions()
 	{
 		require_once Infos::getPluginDir() . 'admin/AdminPages.php';
 		$adminPages = new AdminPages();
-		$prefix = 'admin_post_plato_';
+		$prefix = 'admin_post_voluG_';
 
 		//add_action($prefix . 'mail_test', [$adminPages, 'testMail']);
 	}
@@ -132,14 +110,14 @@ class Admin
 
 		// Add the menu item and page
 		$page_title = 'Overview';
-		$slug = 'plato';
+		$slug = 'volunteersGuide';
 		$icon = 'dashicons-location-alt';
 		$position = 75;
 
-		$capabilityOverview = 'plato_overview';
+		$capabilityOverview = 'voluG_overview';
 		$capabilitySettings = 'manage_options';
 
-		$menuTitle = 'plato';
+		$menuTitle = 'Volunteer\'s Guide';
 		$callback = [$adminPages, 'pageOverview'];
 		add_menu_page($page_title, $menuTitle, $capabilityOverview, $slug, $callback, $icon, $position);
 

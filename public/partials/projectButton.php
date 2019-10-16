@@ -6,7 +6,7 @@
  */
 ?>
 <p>
-	<a class="plato-button"
+	<a class="volunteersGuide-button"
 	   href="https://frontend.workcamp-plato.org/searchresult.352.aspx?code=<?= $projCode ?>&amp;platoorgid=<?= $platoOrgID ?>"
 	   target="_blank" rel="noopener noreferrer"><?= $content ?></a>
 </p>

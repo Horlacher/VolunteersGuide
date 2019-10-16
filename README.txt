@@ -1,7 +1,7 @@
-=== PLATO integration ===
+=== The Volunteer's Guide ===
 Contributors: horlacher
-Donate link: https://github.com/horlacher/wp-plugin-plato
-Tags: Plato, Map
+Donate link: https://github.com/Horlacher/VolunteersGuide
+Tags: Plato, Alliance, Map, Volunteering, Workcamp
 Requires at least: 4.9
 Tested up to: 5.2
 Stable tag: 1.0
@@ -9,28 +9,28 @@ Requires PHP: 7.0.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
-PLATO integration
+The Volunteer's Guide (Alliance network)
 
 == Description ==
-Integrates [PLATO](https://workcamp-plato.org/) features into a Wordpress page.
-Requires an Alliance membership and your PLATO ID to be of use.
-PLATO is the official PLAcement TOol for [The Alliance](http://www.alliance-network.eu/).
+Helps volunteers to find an international workcamp of the Alliance network directly on your WordPress website.
+
+Allows organisations of the Alliance network to into their website with the use of [PLATO](https://workcamp-plato.org/). Requires an Alliance membership and your PLATO ID to be of use. PLATO is the official PLAcement TOol for the [Alliance of European Voluntary Service Organisations](http://www.alliance-network.eu/).
 
 = Features =
-* Integrate the PLATO search form as an iFrame [plato_searchform]
-* World map which links countries to its workcamp list on PLATO [plato_worldmap]
-* Create button to apply for a certain project on PLATO [plato_projectbutton code="projectcode"]
+* PLATO search form, integrated as an iFrame [volug_searchform]
+* Interactive world map, countries are linked to workcamp list on PLATO [volug_worldmap]
+* Button to apply for a certain project on PLATO [volug_projectbutton code="projectcode"]
 
 == Screenshots ==
-1. Example of the world map feature on workcamp.ch
+1. Example of the world map feature on [workcamp.ch](https://www.workcamp.ch/)
 
 == Frequently Asked Questions ==
 = I've found a bug, what can I do? =
-Please report bugs on [GitHub](https://github.com/horlacher/wp-plugin-plato)
+Please report bugs on [GitHub](https://github.com/Horlacher/VolunteersGuide)
 = I want a new feature, what can I do? =
-Please send me a pull request on [GitHub](https://github.com/horlacher/wp-plugin-plato).
-= Are you related to PLATO? =
-No, this plugin is developed independently. This plugin was initially built for the swiss Alliance member [Workcamp Switzerland](https://www.workcamp.ch), but is now available for .
+Please send a pull request on [GitHub](https://github.com/Horlacher/VolunteersGuide).
+= Are you related to PLATO or the Alliance? =
+No, this plugin was initially built for the swiss Alliance member [Workcamp Switzerland](https://www.workcamp.ch), but is now available for the whole network.
 
 == Requirements ==
 * PHP 7

@@ -67,7 +67,7 @@ function showCountry(code) {
 	if (typeof enabledCountries[code] === 'undefined' && typeof allCountries[code] === 'undefined') {
 		return;
 	}
-	var url = platoUrl.replace('{countries}', allCountries[code]['platoCode']);
+	var url = platoUrl.replace('{countries}', allCountries[code]['plato']);
 	var win = window.open(url, '_blank');
 	win.focus();
 }

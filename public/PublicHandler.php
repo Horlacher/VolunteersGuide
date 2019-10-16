@@ -1,15 +1,15 @@
 <?php
 
-namespace Plato;
+namespace VolunteersGuide;
 
 /**
  * The public-facing functionality of the plugin.
  *
- * @link       https://github.com/horlacher/wp-plugin-plato
+ * @link       https://github.com/Horlacher/VolunteersGuide
  * @since      1.0.0
  *
- * @package    Plato
- * @subpackage Plato/public
+ * @package    VolunteersGuide
+ * @subpackage VolunteersGuide/public
  */
 
 /**
@@ -18,8 +18,8 @@ namespace Plato;
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
  *
- * @package    Plato
- * @subpackage Plato/public
+ * @package    VolunteersGuide
+ * @subpackage VolunteersGuide/public
  * @author     Fabian Horlacher
  */
 class PublicHandler
@@ -44,7 +44,7 @@ class PublicHandler
 	private $version;
 
 	/** @var $nonceId string */
-	private $nonceId = 'plato_ajax_submit';
+	private $nonceId = 'voluG_ajax_submit';
 
 	/**
 	 * Initialize the class and set its properties.
@@ -62,9 +62,9 @@ class PublicHandler
 		add_action('init', [$this, 'initPlugin']);
 
 		// Shortcodes
-		add_shortcode('plato_projectbutton', [$this, 'shortcode_projectButton',]);
-		add_shortcode('plato_searchform', [$this, 'shortcode_searchForm',]);
-		add_shortcode('plato_worldmap', [$this, 'shortcode_worldMap',]);
+		add_shortcode('volug_projectbutton', [$this, 'shortcode_projectButton',]);
+		add_shortcode('volug_searchform', [$this, 'shortcode_searchForm',]);
+		add_shortcode('volug_worldmap', [$this, 'shortcode_worldMap',]);
 	}
 
 	public function initPlugin()
@@ -78,7 +78,7 @@ class PublicHandler
 	 */
 	public function enqueueStyles()
 	{
-		wp_enqueue_style($this->pluginName, plugin_dir_url(__FILE__) . 'css/plato-public.min.css', [], $this->version, 'all');
+		wp_enqueue_style($this->pluginName, plugin_dir_url(__FILE__) . 'css/voluG-public.min.css', [], $this->version, 'all');
 	}
 
 	/**
@@ -90,7 +90,7 @@ class PublicHandler
 	{
 		wp_enqueue_script(
 			$this->pluginName,
-			plugin_dir_url(__FILE__) . 'js/plato-public.min.js',
+			plugin_dir_url(__FILE__) . 'js/voluG-public.min.js',
 			['jquery',],
 			$this->version,
 			false
@@ -103,29 +103,26 @@ class PublicHandler
 		// normalize attribute keys, lowercase
 		$atts = array_change_key_case((array)$atts, CASE_LOWER);
 		if (!isset($atts['code'])) {
-			return __('Shortcode must include the attribute "code" with the plato project code aas value');
+			return __('Shortcode must include the attribute "code" with the plato project code as value');
 		}
 
 		$projCode = sanitize_text_field($atts['code']);
-
-		ob_start();
 		$platoOrgID = Config::getValue('platoOrgID');
 		$content    = $content
 			? sanitize_text_field($content)
 			: sanitize_text_field(Config::getValue('button_default_text'));
 
+		ob_start();
 		include Infos::getPluginDir() . 'public/partials/projectButton.php';
-
 		return ob_get_clean();
 	}
 
 	public function shortcode_searchForm()
 	{
-		ob_start();
 		$platoOrgID = Config::getValue('platoOrgID');
 
+		ob_start();
 		include Infos::getPluginDir() . 'public/partials/searchForm.php';
-
 		return ob_get_clean();
 	}
 
@@ -133,19 +130,19 @@ class PublicHandler
 	{
 		$this->enqueueStyles();
 		$this->enqueueScripts();
+		/*
 		$demovoxJsArr = [
 			'language'          => Infos::getUserLanguage(),
 			'ajaxUrl'           => admin_url('admin-ajax.php'),
 			'nonce'             => Core::createNonce($this->nonceId),
-			'apiAddressEnabled' => '',
 		];
-		wp_localize_script($this->pluginName, 'platoMap', $demovoxJsArr);
+		wp_localize_script($this->pluginName, 'voluGMap', $demovoxJsArr);
+		*/
 
-		ob_start();
 		$platoOrgID = Config::getValue('platoOrgID');
 
+		ob_start();
 		include Infos::getPluginDir() . 'public/partials/worldMap.php';
-
 		return ob_get_clean();
 	}
 }

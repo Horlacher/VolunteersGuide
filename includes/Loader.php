@@ -3,14 +3,14 @@
 /**
  * Register all actions and filters for the plugin
  *
- * @link       https://github.com/horlacher/wp-plugin-plato
+ * @link       https://github.com/Horlacher/VolunteersGuide
  * @since      1.0.0
  *
- * @package    Plato
- * @subpackage Plato/includes
+ * @package    VolunteersGuide
+ * @subpackage VolunteersGuide/includes
  */
 
-namespace Plato;
+namespace VolunteersGuide;
 
 /**
  * Register all actions and filters for the plugin.
@@ -19,8 +19,8 @@ namespace Plato;
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Plato
- * @subpackage Plato/includes
+ * @package    VolunteersGuide
+ * @subpackage VolunteersGuide/includes
  * @author     Fabian Horlacher
  */
 class Loader
