@@ -1,0 +1,15 @@
+{
+  "name": "horlacher/VolunteersGuide",
+  "authors": [
+    {
+      "name": "Fabian Horlacher",
+      "email": "nospam@nospam.com"
+    }
+  ],
+  "require": {
+    "umpirsky/country-list": "^2.0"
+  },
+  "config": {
+    "vendor-dir": "libs/composer"
+  }
+}

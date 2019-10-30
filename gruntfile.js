@@ -2,8 +2,8 @@ const pubCss = './public/css/',
 	pubJs = './public/js/',
 	adminCss = './admin/css/',
 	adminJs = './admin/js/',
-	buildComposer = './build/libs/composer/';
-
+	buildComposer = './build/libs/composer/',
+	buildCountryList = buildComposer + 'umpirsky/country-list/data/';
 module.exports = function (grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -132,7 +132,9 @@ module.exports = function (grunt) {
 		clean: {
 			build: ['build/',],
 			buildComposer: [
-				buildComposer + 'defuse/php-encryption/docs',
+				buildCountryList + '*_*', buildCountryList + '*/*.csv', buildCountryList + '*/*.html', buildCountryList + '*/*.json',
+				buildCountryList + '*/*.sql', buildCountryList + '*/*.txt', buildCountryList + '*/*.xliff', buildCountryList + '*/*.xml',
+				buildCountryList + '*/*.yaml',
 			],
 			buildWpOrg: ['buildWpOrg/',],
 			public: [pubCss + '*.css', pubCss + '*.map', pubJs + '*.min.js', pubJs + '*.map',],
