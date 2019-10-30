@@ -85,13 +85,18 @@ typings/
 /.idea/
 
 # generated assets
-/.sass-cache/
 *.map
 *.min.js
-*.css
+*.dep.js
+*.es5.js
 /admin/js/Chart.js
 /admin/js/Chart.bundle.js
+
+/.sass-cache/
+*.css
+
 /languages/*.mo
 
 /build/
 /buildWpOrg/
+/configCache/*

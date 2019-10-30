@@ -53,12 +53,6 @@ class Admin
 	{
 		$this->pluginName = $pluginName;
 		$this->version = $version;
-
-		// Hook into the admin menu
-		add_action('admin_menu', [$this, 'setupAdminMenu']);
-
-		// AJAX
-		$this->setupAdminAjaxActions();
 	}
 
 	/**
@@ -68,7 +62,7 @@ class Admin
 	 */
 	public function enqueueStyles()
 	{
-		wp_enqueue_style($this->pluginName, plugin_dir_url(__FILE__) . 'css/voluG-admin.min.css', [], $this->version, 'all');
+		wp_enqueue_style($this->pluginName, plugin_dir_url(__FILE__) . 'css/volunG-admin.min.css', [], $this->version, 'all');
 	}
 
 	/**
@@ -78,9 +72,9 @@ class Admin
 	 */
 	public function enqueueScripts()
 	{
-		/*
-		wp_enqueue_script($this->pluginName . '_admin', plugin_dir_url(__FILE__) . 'js/voluG-admin.min.js', ['jquery'], $this->version, false);
+		wp_enqueue_script($this->pluginName . '_admin', plugin_dir_url(__FILE__) . 'js/volunG-admin.min.js', ['jquery'], $this->version, false);
 
+		/*
 		wp_enqueue_media();
 		$localJsArr = [
 			'uploader' => [
@@ -88,17 +82,8 @@ class Admin
 				'text'  => 'Select',
 			],
 		];
-		wp_localize_script($this->pluginName . '_admin', 'voluGAdmin', $localJsArr);
+		wp_localize_script($this->pluginName . '_admin', 'volunGAdmin', $localJsArr);
 		*/
-	}
-
-	public function setupAdminAjaxActions()
-	{
-		require_once Infos::getPluginDir() . 'admin/AdminPages.php';
-		$adminPages = new AdminPages();
-		$prefix = 'admin_post_voluG_';
-
-		//add_action($prefix . 'mail_test', [$adminPages, 'testMail']);
 	}
 
 	public function setupAdminMenu()
@@ -110,11 +95,11 @@ class Admin
 
 		// Add the menu item and page
 		$page_title = 'Overview';
-		$slug = 'volunteersGuide';
+		$slug = 'volunG';
 		$icon = 'dashicons-location-alt';
 		$position = 75;
 
-		$capabilityOverview = 'voluG_overview';
+		$capabilityOverview = 'volunG_overview';
 		$capabilitySettings = 'manage_options';
 
 		$menuTitle = 'Volunteer\'s Guide';

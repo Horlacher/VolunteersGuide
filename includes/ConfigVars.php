@@ -5,22 +5,91 @@ namespace VolunteersGuide;
 class ConfigVars
 {
 	static public $sections = [
-		'base'             => [
+		'base'            => [
 			'title' => 'Base settings',
-			'page'  => 'voluGSettings',
+			'page'  => 'volunGFields0',
 		],
-		'enabledLanguages' => [
-			'title' => 'Enabled languages',
-			'page'  => 'voluGSettings2',
+		'plato'           => [
+			'title' => 'PLATO',
+			'page'  => 'volunGFields0',
+			'sub'   => 'I you don\'t know about PLATO, this plugin wo\'t be of use for you.',
+		],
+		'mapBase'         => [
+			'title' => 'Map settings',
+			'page'  => 'volunGFields1',
+		],
+		'continentColors' => [
+			'title' => 'Continent colors',
+			'page'  => 'volunGFields1',
+			'sub'   => 'Set the colors of the continents on the map',
+		],
+		'countryColors'   => [
+			'title' => 'Countries colors',
+			'page'  => 'volunGFields1',
+		],
+		'continents'      => [
+			'title' => 'Enable Continents (and set color strength)',
+			'page'  => 'volunGFields1',
+			'sub'   => 'Enable map zoom in when a user clicks on the continent. Set the color strength in percent.',
+		],
+		'countries'       => [
+			'title' => 'Enable Countries',
+			'page'  => 'volunGFields2',
+			'sub'   => 'Set what will be shown when a user clicks on the country on the map and set the color strength in percent. "disabled" will always have minimum (zero) strength.',
 		],
 	];
 	static public $fields = [
 		[
-			'uid'          => 'platoOrgID',
-			'label'        => 'platoOrgID',
-			'section'      => 'base',
+			'uid'          => 'platoOrgId',
+			'label'        => 'Plato org ID',
+			'section'      => 'plato',
 			'type'         => 'text',
 			'supplemental' => 'Plato ID of your organisation',
+		],
+		[
+			'uid'          => 'inlineConfig',
+			'label'        => 'Inline config',
+			'section'      => 'mapBase',
+			'type'         => 'checkbox',
+			'supplemental' => 'Include the config on the page instead of loading it later by AJAX (worse performance for first page load after config change or new client language, might be fine on fast servers)',
+		],
+		[
+			'uid'          => 'colorContinent1',
+			'label'        => 'Color weak',
+			'section'      => 'continentColors',
+			'type'         => 'colorpicker',
+			'supplemental' => '',
+		],
+		[
+			'uid'          => 'colorContinent2',
+			'label'        => 'Color strong',
+			'section'      => 'continentColors',
+			'type'         => 'colorpicker',
+			'supplemental' => '',
+		],
+		[
+			'uid'     => 'colorContinentHover',
+			'label'   => 'Color on mouse over',
+			'section' => 'continentColors',
+			'type'    => 'colorpicker',
+		],
+		[
+			'uid'     => 'colorCountry1',
+			'label'   => 'Color weak',
+			'section' => 'countryColors',
+			'type'    => 'colorpicker',
+		],
+		[
+			'uid'     => 'colorCountry2',
+			'label'   => 'Color strong',
+			'section' => 'countryColors',
+			'type'    => 'colorpicker',
+		],
+		[
+			'uid'     => 'colorCountryHover',
+			'label'   => 'Color on mouse over',
+			'section' => 'countryColors',
+			'type'    => 'colorpicker',
 		],
 	];
 
@@ -44,9 +113,31 @@ class ConfigVars
 			'label'        => 'Project button - default text',
 			'section'      => 'base',
 			'type'         => 'text',
-			'default'      => __('Apply here!', 'voluG'),
+			'default'      => __('Apply here!', 'volunG'),
 			'supplemental' => 'If you don\'t specify a label for a project button, this text will be used',
 		];
+
+		$allMapContinents = Countries::getAllMapContinents();
+		foreach ($allMapContinents as $codeLong) {
+			$fields[] = [
+				'uid'     => 'continent_' . $codeLong,
+				'label'   => Countries::getContinentName($codeLong),
+				'section' => 'continents',
+				'default' => '1',
+				'type'    => 'mapContinent',
+			];
+		}
+
+		$allMapCountries = Countries::getAllMapCountries();
+		foreach ($allMapCountries as $country) {
+			$fields[] = [
+				'uid'     => 'country_' . $country,
+				'label'   => Countries::getCountryName($country),
+				'section' => 'countries',
+				'default' => '',
+				'type'    => 'mapCountry',
+			];
+		}
 		return $fields;
 	}
 

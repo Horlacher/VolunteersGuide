@@ -17,9 +17,9 @@ Helps volunteers to find an international workcamp of the Alliance network direc
 Allows organisations of the Alliance network to into their website with the use of [PLATO](https://workcamp-plato.org/). Requires an Alliance membership and your PLATO ID to be of use. PLATO is the official PLAcement TOol for the [Alliance of European Voluntary Service Organisations](http://www.alliance-network.eu/).
 
 = Features =
-* PLATO search form, integrated as an iFrame [volug_searchform]
-* Interactive world map, countries are linked to workcamp list on PLATO [volug_worldmap]
-* Button to apply for a certain project on PLATO [volug_projectbutton code="projectcode"]
+* PLATO search form, integrated as an iFrame [volung_searchform]
+* Interactive world map, countries are linked to workcamp list on PLATO [volung_worldmap]
+* Button to apply for a certain project on PLATO [volung_projectbutton code="projectcode"]
 
 == Screenshots ==
 1. Example of the world map feature on [workcamp.ch](https://www.workcamp.ch/)

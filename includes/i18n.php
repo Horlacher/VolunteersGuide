@@ -37,7 +37,7 @@ class i18n
 	public function loadPluginTextdomain()
 	{
 		load_plugin_textdomain(
-			'voluG',
+			'volunG',
 			false,
 			dirname(dirname(plugin_basename(__FILE__))) . '/languages/'
 		);

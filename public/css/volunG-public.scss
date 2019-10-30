@@ -1,0 +1,55 @@
+//@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+.volunG-button {
+	font-size: 24px;
+	color: #fff;
+	background-color: #313131;
+	padding: 6px 12px 6px 12px;
+	border-width: 1px;
+	border-color: #313131;
+	border-style: solid;
+	border-radius: 10px;
+}
+
+.volunG-button:hover {
+	color: #fff;
+	background-color: #595959;
+	box-shadow: 3px 3px 1px 1px #ccc;
+	transition: all 0.2s ease;
+	text-decoration: none;
+}
+
+#volunG-world-map {
+	&, .jvectormap-container svg {
+		width: 100%;
+		height: 550px;
+	}
+
+	.jvectormap-container {
+		background-color: transparent !important;
+	}
+
+	.loading {
+		border: 8px solid #f3f3f3; /* Light grey */
+		border-top: 8px solid #303030; /* Blue */
+		border-radius: 50%;
+		width: 60px;
+		height: 60px;
+		animation: loader-spin 2s linear infinite;
+		margin: 0 auto;
+	}
+}
+
+.jvectormap-zoomin, .jvectormap-zoomout {
+	width: 12px;
+	height: 12px;
+}
+
+@keyframes loader-spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

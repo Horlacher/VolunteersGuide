@@ -17,9 +17,15 @@
     "jvectormap-next": "^3.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.6.3",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
     "css-loader": "^2.1.1",
     "grunt": "^1.0.4",
     "grunt-available-tasks": "^0.6.3",
+    "grunt-babel": "^8.0.0",
     "grunt-check-dependencies": "^1.0.0",
     "grunt-checkwpversion": "^0.3.0",
     "grunt-contrib-clean": "^2.0.0",
@@ -30,6 +36,7 @@
     "grunt-contrib-uglify": "^4.0.1",
     "grunt-mkdir": "^1.0.0",
     "grunt-shell": "^3.0.1",
+    "load-grunt-tasks": "^5.1.0",
     "style-loader": "^0.23.1"
   }
 }

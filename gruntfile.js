@@ -5,6 +5,7 @@ const pubCss = './public/css/',
 	buildComposer = './build/libs/composer/',
 	buildCountryList = buildComposer + 'umpirsky/country-list/data/';
 module.exports = function (grunt) {
+	require('load-grunt-tasks')(grunt); // npm install --save-dev load-grunt-tasks
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		copy: {
@@ -72,16 +73,47 @@ module.exports = function (grunt) {
 		checkDependencies: {
 			this: {},
 		},
+		babel: {
+			options: {
+				sourceMap: true,
+				presets: ['@babel/preset-env',],
+				plugins: [
+					'@babel/plugin-proposal-class-properties',
+				]
+			},
+			dist: {
+				files: {
+					[pubJs + 'volunG-public.es5.js']: pubJs + 'volunG-public.js',
+				}
+			}
+		},
 		uglify: {
 			admin: {
 				files: {
-					[adminJs + 'voluG-admin.min.js']: [adminJs + 'voluG-admin.js',],
-					[pubJs + 'voluG-public.min.js']: [
+					[adminJs + 'volunG-admin.min.js']: [
+						'./node_modules/jquery-wheelcolorpicker/jquery.wheelcolorpicker.js',
+						adminJs + 'volunG-admin.js',
+					]
+				}
+			},
+			public: {
+				files: {
+					[pubJs + 'volunG-public.min.js']: [
 						'./node_modules/jvectormap-next/jquery-jvectormap.min.js',
 						pubJs + 'jquery-jvectormap-continents-mill-en.js',
 						pubJs + 'jquery-jvectormap-world-mill-en.js',
 						pubJs + 'countries.js',
-						pubJs + 'voluG-public.js',
+						pubJs + 'volunG-public.es5.js',
+					]
+				}
+			},
+			publicDev: {
+				files: {
+					[pubJs + 'volunG-public.dep.js']: [
+						'./node_modules/jvectormap-next/jquery-jvectormap.min.js',
+						pubJs + 'jquery-jvectormap-continents-mill-en.js',
+						pubJs + 'jquery-jvectormap-world-mill-en.js',
+						pubJs + 'countries.js',
 					]
 				}
 			}
@@ -92,8 +124,8 @@ module.exports = function (grunt) {
 					style: 'expanded'
 				},
 				files: {
-					[pubCss + 'voluG-public.css']: pubCss + 'voluG-public.scss',
-					[adminCss + 'voluG-admin.css']: adminCss + 'voluG-admin.scss',
+					[pubCss + 'volunG-public.css']: pubCss + 'volunG-public.scss',
+					[adminCss + 'volunG-admin.css']: adminCss + 'volunG-admin.scss',
 				},
 			}
 		},
@@ -104,11 +136,14 @@ module.exports = function (grunt) {
 			},
 			target: {
 				files: {
-					[pubCss + 'voluG-public.min.css']: [
+					[pubCss + 'volunG-public.min.css']: [
 						'./node_modules/jvectormap-next/jquery-jvectormap.css',
-						pubCss + 'voluG-public.css',
+						pubCss + 'volunG-public.css',
 					],
-					[adminCss + 'voluG-admin.min.css']: adminCss + 'voluG-admin.css',
+					[adminCss + 'volunG-admin.min.css']: [
+						'./node_modules/jquery-wheelcolorpicker/css/wheelcolorpicker.css',
+						adminCss + 'volunG-admin.css',
+					],
 				}
 			}
 		},
@@ -119,7 +154,7 @@ module.exports = function (grunt) {
 					/*
 					archive: function () {
 						// The global value git.tag is set by another task
-						return 'voluG-' + git.tag + '.zip'
+						return 'volunG-' + git.tag + '.zip'
 					}
 					*/
 				},
@@ -138,7 +173,7 @@ module.exports = function (grunt) {
 			],
 			buildWpOrg: ['buildWpOrg/',],
 			public: [pubCss + '*.css', pubCss + '*.map', pubJs + '*.min.js', pubJs + '*.map',],
-			admin: [adminCss + '*.css', adminCss + '*.map', adminJs + 'voluG-admin.min.js', adminJs + 'Chart.*',],
+			admin: [adminCss + '*.css', adminCss + '*.map', adminJs + 'volunG-admin.min.js', adminJs + 'Chart.*',],
 		},
 		checkwpversion: {
 			options: {
@@ -181,7 +216,10 @@ module.exports = function (grunt) {
 	// define Tasks
 	grunt.registerTask('default', 'availabletasks');
 	grunt.registerTask('buildAssets', [
-		'checkDependencies', 'clean', 'copy:adminAssets', 'uglify', 'sass', 'cssmin', 'po2mo',
+		'checkDependencies', 'clean', 'copy:adminAssets', 'babel', 'uglify:public', 'uglify:admin', 'sass', 'cssmin', 'po2mo',
+	]);
+	grunt.registerTask('buildAssetsDev', [
+		'uglify:publicDev', 'uglify:admin', 'sass', 'cssmin', 'po2mo',
 	]);
 	grunt.registerTask('build', [
 		'buildAssets', 'mkdir:build', 'copy:buildDir', 'clean:buildComposer',

@@ -44,7 +44,7 @@ class PublicHandler
 	private $version;
 
 	/** @var $nonceId string */
-	private $nonceId = 'voluG_ajax_submit';
+	private $nonceId = 'volunG_ajax_submit';
 
 	/**
 	 * Initialize the class and set its properties.
@@ -58,17 +58,6 @@ class PublicHandler
 	{
 		$this->pluginName = $pluginName;
 		$this->version    = $version;
-
-		add_action('init', [$this, 'initPlugin']);
-
-		// Shortcodes
-		add_shortcode('volug_projectbutton', [$this, 'shortcode_projectButton',]);
-		add_shortcode('volug_searchform', [$this, 'shortcode_searchForm',]);
-		add_shortcode('volug_worldmap', [$this, 'shortcode_worldMap',]);
-	}
-
-	public function initPlugin()
-	{
 	}
 
 	/**
@@ -78,7 +67,7 @@ class PublicHandler
 	 */
 	public function enqueueStyles()
 	{
-		wp_enqueue_style($this->pluginName, plugin_dir_url(__FILE__) . 'css/voluG-public.min.css', [], $this->version, 'all');
+		wp_enqueue_style($this->pluginName, plugin_dir_url(__FILE__) . 'css/volunG-public.min.css', [], $this->version, 'all');
 	}
 
 	/**
@@ -88,13 +77,30 @@ class PublicHandler
 	 */
 	public function enqueueScripts()
 	{
-		wp_enqueue_script(
-			$this->pluginName,
-			plugin_dir_url(__FILE__) . 'js/voluG-public.min.js',
-			['jquery',],
-			$this->version,
-			false
-		);
+		if (!WP_DEBUG) {
+			wp_enqueue_script(
+				$this->pluginName . 'public',
+				plugin_dir_url(__FILE__) . 'js/volunG-public.min.js',
+				['jquery',],
+				$this->version,
+				false
+			);
+		} else {
+			wp_enqueue_script(
+				$this->pluginName . 'public.dep',
+				plugin_dir_url(__FILE__) . 'js/volunG-public.dep.js',
+				['jquery',],
+				$this->version,
+				false
+			);
+			wp_enqueue_script(
+				$this->pluginName . 'public.dev',
+				plugin_dir_url(__FILE__) . 'js/volunG-public.js',
+				['jquery',],
+				$this->version,
+				false
+			);
+		}
 	}
 
 	public function shortcode_projectButton($atts = [], $content = null)
@@ -106,8 +112,8 @@ class PublicHandler
 			return __('Shortcode must include the attribute "code" with the plato project code as value');
 		}
 
-		$projCode = sanitize_text_field($atts['code']);
-		$platoOrgID = Config::getValue('platoOrgID');
+		$projCode   = sanitize_text_field($atts['code']);
+		$platoOrgId = Config::getValue('platoOrgId');
 		$content    = $content
 			? sanitize_text_field($content)
 			: sanitize_text_field(Config::getValue('button_default_text'));
@@ -119,7 +125,7 @@ class PublicHandler
 
 	public function shortcode_searchForm()
 	{
-		$platoOrgID = Config::getValue('platoOrgID');
+		$platoOrgId = Config::getValue('platoOrgId');
 
 		ob_start();
 		include Infos::getPluginDir() . 'public/partials/searchForm.php';
@@ -130,19 +136,25 @@ class PublicHandler
 	{
 		$this->enqueueStyles();
 		$this->enqueueScripts();
-		/*
-		$demovoxJsArr = [
-			'language'          => Infos::getUserLanguage(),
-			'ajaxUrl'           => admin_url('admin-ajax.php'),
-			'nonce'             => Core::createNonce($this->nonceId),
-		];
-		wp_localize_script($this->pluginName, 'voluGMap', $demovoxJsArr);
-		*/
-
-		$platoOrgID = Config::getValue('platoOrgID');
+		$data = Config::getValue('inlineConfig') ? MapConfig::getMapConfig() : null;
 
 		ob_start();
 		include Infos::getPluginDir() . 'public/partials/worldMap.php';
 		return ob_get_clean();
 	}
+
+	public function echoMapConfig()
+	{
+		header('Content-type: text/json');
+		header('Expires: 0');
+		header('Cache-Control: must-revalidate');
+		header('Pragma: public');
+
+		$locale = isset($_REQUEST['locale']) ? sanitize_file_name(substr($_REQUEST['locale'], 0, 2)) : null;
+		MapConfig::getMapConfig($locale, true);
+
+		exit; // exit is required to keep Wordpress from echoing a trailing "0"
+		// https://wordpress.stackexchange.com/questions/97502/admin-ajax-is-returning-0
+	}
+
 }

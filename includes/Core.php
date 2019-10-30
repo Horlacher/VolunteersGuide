@@ -82,6 +82,7 @@ class Core
 		$this->setLocale();
 		$this->defineAdminHooks();
 		$this->definePublicHooks();
+		$this->defineShortcodes();
 	}
 
 	/**
@@ -113,7 +114,9 @@ class Core
 		 * The helper classes
 		 */
 		require_once $pluginDir . 'includes/helpers/Infos.php';
+		require_once $pluginDir . 'includes/helpers/Countries.php';
 		require_once $pluginDir . 'includes/helpers/Strings.php';
+		require_once $pluginDir . 'includes/helpers/MapConfig.php';
 		require_once $pluginDir . 'includes/helpers/Config.php';
 
 		/**
@@ -170,6 +173,7 @@ class Core
 
 		$this->loader->addAction('admin_enqueue_scripts', $plugin_admin, 'enqueueStyles');
 		$this->loader->addAction('admin_enqueue_scripts', $plugin_admin, 'enqueueScripts');
+		$this->loader->addAction('admin_menu', $plugin_admin, 'setupAdminMenu');
 	}
 
 	/**
@@ -186,8 +190,26 @@ class Core
 		$this->loader->addAction('public_enqueue_styles', $plugin_public, 'enqueueStyles');
 		$this->loader->addAction('public_enqueue_scripts', $plugin_public, 'enqueueScripts');
 		$this->loader->addAction('public_define_posttype', $plugin_public, 'definePosttype');
+
+		// AJAX
+		$this->loader->addAction('wp_ajax_volunG_MapConfig', $plugin_public, 'echoMapConfig');
+		$this->loader->addAction('wp_ajax_nopriv_volunG_MapConfig', $plugin_public, 'echoMapConfig');
 	}
 
+	/**
+	 * Register all of the hooks related to the admin area functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function defineShortcodes()
+	{
+		$plugin_public = new PublicHandler($this->getPluginName(), $this->getVersion());
+		add_shortcode('volung_projectbutton', [$plugin_public, 'shortcode_projectButton',]);
+		add_shortcode('volung_searchform', [$plugin_public, 'shortcode_searchForm',]);
+		add_shortcode('volung_worldmap', [$plugin_public, 'shortcode_worldMap',]);
+	}
 
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
@@ -233,10 +255,11 @@ class Core
 		return $this->version;
 	}
 
-	private static $optionPrefix = 'voluG_';
+	private static $optionPrefix = 'volunG_';
 
 	/**
 	 * @param $id
+	 *
 	 * @return string
 	 */
 	public static function getWpId($id)
@@ -247,6 +270,7 @@ class Core
 
 	/**
 	 * @param string $id
+	 *
 	 * @return mixed Value set for the option. False if not set.
 	 */
 	public static function getOption($id)
@@ -258,9 +282,10 @@ class Core
 	/**
 	 * Update or set option
 	 *
-	 * @param string $id Option name. Expected to not be SQL-escaped.
-	 * @param mixed $value Option value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+	 * @param string      $id       Option name. Expected to not be SQL-escaped.
+	 * @param mixed       $value    Option value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
 	 * @param string|bool $autoload Optional. Whether to load the option when WordPress starts up
+	 *
 	 * @return bool False if value was not updated and true if value was updated.
 	 */
 	public static function setOption($id, $value, $autoload = null)
@@ -271,6 +296,7 @@ class Core
 
 	/**
 	 * @param string $id
+	 *
 	 * @return bool True, if option is successfully deleted. False on failure.
 	 */
 	public static function delOption($id)
@@ -296,7 +322,7 @@ class Core
 	static function showError($error, $statusCode = null)
 	{
 		$isError = !(substr($statusCode, 0, 1) == 2 || substr($statusCode, 0, 1) == 3);
-		$string = self::logMessage($statusCode . ' - ' . $error, $isError ? 'error' : 'info');
+		$string  = self::logMessage($statusCode . ' - ' . $error, $isError ? 'error' : 'info');
 		if (WP_DEBUG) {
 			echo $string;
 		}
@@ -329,15 +355,16 @@ class Core
 		if (!WP_DEBUG) {
 			return;
 		}
-		$trace = debug_backtrace();
+		$trace  = debug_backtrace();
 		$source = $trace[1];
 		if ($source['function'] == 'showError' && $source['function'] == 'VolunteersGuide\Core') {
 			$source = $trace[2];
 		}
-		$date = date('Y-m-d G:i:s', time());
+		$date   = date('Y-m-d G:i:s', time());
 		$string = $date . ' [' . $level . '] ' . $source['file'] . ':' . $source['line'] . "\n" . $message . "\n";
 
-		$fn = Infos::getPluginDir() . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'debug.VolunteersGuide' . ($type ? '.' . $type : '') . '.php';
+		$fn = Infos::getPluginDir() . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'debug.VolunteersGuide'
+			  . ($type ? '.' . $type : '') . '.php';
 		if (!file_exists($fn)) {
 			$string = '<?php exit;' . "\n" . $string;
 		}

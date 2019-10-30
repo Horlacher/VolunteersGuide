@@ -4,28 +4,40 @@ namespace VolunteersGuide;
 
 class Config
 {
-	const GLUE_LANG = '_';
-	const GLUE_PART = '_';
+	const GLUE_PART     = '_';
+	const PART_PAGE     = 'page';
+	const PART_URL      = 'url';
+	const PART_STRENGTH = 'strength';
 
 	/**
-	 * @param $id string
+	 * @param $id      string
 	 * @param $valPart null|string
+	 *
 	 * @return mixed Value set for the config.
 	 */
 	public static function getValue($id, $valPart = null)
 	{
 		$fullId = $id . ($valPart ? self::GLUE_PART . $valPart : '');
-		$field = ConfigVars::getField($id);
+		$field  = ConfigVars::getField($id);
 		if ($field === null) {
 			return null;
 		}
 		$value = Core::getOption($fullId);
 
-		return self::valueFormat($valPart, $value, $field);
+		return self::valueFormat($value, $field, $valPart);
 	}
 
-	protected static function valueFormat($valPart, $value, $field = null)
+	protected static function valueFormat($value, $field = null, $valPart = null)
 	{
+		if ($valPart) {
+			if ($valPart == self::PART_STRENGTH) {
+				if ($value === false) {
+					$value = 100;
+				}
+				$value = intval($value);
+			}
+			return $value;
+		}
 		if (isset($field['type']) && $field['type'] === 'checkbox') {
 			if ($value === false) {
 				$value = isset($field['default']) ? $field['default'] : false; // Set to our default
