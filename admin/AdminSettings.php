@@ -14,21 +14,6 @@ namespace VolunteersGuide;
  */
 class AdminSettings
 {
-	/**
-	 * Initialize the class and set its properties.
-	 *
-	 * @since    1.0.0
-	 */
-	public function __construct()
-	{
-		// Hook into the admin menu
-		add_action('admin_init', [$this, 'setupFields']);
-		add_action('admin_init', [$this, 'setupSections']);
-
-		// option update actions
-		add_action('updated_option', [$this, 'updatedOption'], 10, 3);
-	}
-
 	public function updatedOption($option_name, $old_value, $value)
 	{
 		if (substr($option_name, 0, 7) !== 'volunG_') {
@@ -40,8 +25,19 @@ class AdminSettings
 		MapConfig::resetCache();
 	}
 
+	/*
+	public function updateOption($option_name, $old_value, $value)
+	{
+		if (substr($option_name, 0, 7) !== 'volunG_') {
+			return;
+		}
+		$this->initSettings();
+	}
+	*/
 	public function pageSettings()
 	{
+		//$this->initSettings();
+
 		$tabs       = [
 			'General',
 			'World Map',
@@ -71,7 +67,7 @@ class AdminSettings
 		include Infos::getPluginDir() . 'admin/partials-settings/settings-2.php';
 	}
 
-	public function setupSections()
+	protected function setupSections()
 	{
 		$areas = ConfigDefinition::getSections();
 		foreach ($areas as $name => $section) {
@@ -124,7 +120,12 @@ class AdminSettings
 		}
 	}
 
-	public function setupFields()
+	public function initSettings()
+	{
+		$this->setupFields();
+		$this->setupSections();
+	}
+	protected function setupFields()
 	{
 		$sections = ConfigDefinition::getSections();
 		$fields   = ConfigDefinition::getFields();

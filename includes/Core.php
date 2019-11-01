@@ -171,11 +171,20 @@ class Core
 	 */
 	private function defineAdminHooks()
 	{
-		$plugin_admin = new Admin($this->getPluginName(), $this->getVersion());
+		$pluginAdmin = new Admin($this->getPluginName(), $this->getVersion());
 
-		$this->loader->addAction('admin_enqueue_scripts', $plugin_admin, 'enqueueStyles');
-		$this->loader->addAction('admin_enqueue_scripts', $plugin_admin, 'enqueueScripts');
-		$this->loader->addAction('admin_menu', $plugin_admin, 'setupAdminMenu');
+		$this->loader->addAction('admin_enqueue_scripts', $pluginAdmin, 'enqueueStyles');
+		$this->loader->addAction('admin_enqueue_scripts', $pluginAdmin, 'enqueueScripts');
+		$this->loader->addAction('admin_menu', $pluginAdmin, 'setupAdminMenu');
+
+
+		require_once Infos::getPluginDir() . 'admin/AdminSettings.php';
+		$adminSettings = new AdminSettings();
+		add_action('admin_init', [$adminSettings, 'initSettings']); // TODO: only call initSettings when needed
+
+		// option update actions
+		$this->loader->addAction('update_option', $adminSettings, 'updateOption', 10, 3);
+		$this->loader->addAction('updated_option', $adminSettings, 'updatedOption', 10, 3);
 	}
 
 	/**

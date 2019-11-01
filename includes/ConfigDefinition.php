@@ -24,14 +24,14 @@ class ConfigDefinition
 			'page'  => 'volunGFields1',
 			'sub'   => 'Set the colors of the continents on the map',
 		],
-		'countryColors'   => [
-			'title' => 'Countries colors',
-			'page'  => 'volunGFields1',
-		],
 		'continents'      => [
 			'title' => 'Enable Continents (and set color strength)',
 			'page'  => 'volunGFields1',
 			'sub'   => 'Enable map zoom in when a user clicks on the continent. Set the color strength in percent.',
+		],
+		'countryColors'   => [
+			'title' => 'Countries colors',
+			'page'  => 'volunGFields2',
 		],
 		'countries'       => [
 			'title' => 'Enable Countries',
