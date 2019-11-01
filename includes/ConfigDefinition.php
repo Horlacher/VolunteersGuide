@@ -2,9 +2,10 @@
 
 namespace VolunteersGuide;
 
-class ConfigVars
+class ConfigDefinition
 {
-	static public $sections = [
+	protected static $fieldsCache = null;
+	protected static $sections = [
 		'base'            => [
 			'title' => 'Base settings',
 			'page'  => 'volunGFields0',
@@ -38,7 +39,7 @@ class ConfigVars
 			'sub'   => 'Set what will be shown when a user clicks on the country on the map and set the color strength in percent. "disabled" will always have minimum (zero) strength.',
 		],
 	];
-	static public $fields = [
+	protected static $fields = [
 		[
 			'uid'          => 'platoOrgId',
 			'label'        => 'Plato org ID',
@@ -95,7 +96,7 @@ class ConfigVars
 
 	public static function getField($id)
 	{
-		$fields = ConfigVars::getFields();
+		$fields = ConfigDefinition::getFields();
 		$key    = array_search($id, array_column($fields, 'uid'));
 		if ($key === false) {
 			Core::logMessage('Option field "' . $id . '" does not exist.');
@@ -107,6 +108,9 @@ class ConfigVars
 
 	public static function getFields()
 	{
+		if (self::$fieldsCache !== null) {
+			return self::$fieldsCache;
+		}
 		$fields   = self::$fields;
 		$fields[] = [
 			'uid'          => 'button_default_text',
@@ -138,6 +142,8 @@ class ConfigVars
 				'type'    => 'mapCountry',
 			];
 		}
+
+		self::$fieldsCache = $fields;
 		return $fields;
 	}
 
@@ -156,7 +162,7 @@ class ConfigVars
 	 *
 	 * @param $id      string
 	 * @param $valPart null|string
-	 * @param $default null|mixed Default value (ignore value in ConfigVars, for example to avoid function nesting)
+	 * @param $default null|mixed Default value (ignore value in ConfigDefinition, for example to avoid function nesting)
 	 *
 	 * @return mixed Value set for the config.
 	 */

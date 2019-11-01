@@ -80,7 +80,9 @@ class Core
 
 		$this->loadDependencies();
 		$this->setLocale();
-		$this->defineAdminHooks();
+		if (is_admin()) {
+			$this->defineAdminHooks();
+		}
 		$this->definePublicHooks();
 		$this->defineShortcodes();
 	}
@@ -128,7 +130,7 @@ class Core
 		/**
 		 * The class responsible for defining all config fields.
 		 */
-		require_once $pluginDir . 'includes/ConfigVars.php';
+		require_once $pluginDir . 'includes/ConfigDefinition.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.

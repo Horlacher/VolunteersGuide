@@ -18,13 +18,13 @@ class Config
 	public static function getValue($id, $valPart = null)
 	{
 		$fullId = $id . ($valPart ? self::GLUE_PART . $valPart : '');
-		$field  = ConfigVars::getField($id);
-		if ($field === null) {
+		$fieldDefinition  = ConfigDefinition::getField($id);
+		if ($fieldDefinition === null) {
 			return null;
 		}
 		$value = Core::getOption($fullId);
 
-		return self::valueFormat($value, $field, $valPart);
+		return self::valueFormat($value, $fieldDefinition, $valPart);
 	}
 
 	protected static function valueFormat($value, $field = null, $valPart = null)
@@ -57,7 +57,7 @@ class Config
 	 */
 	public static function deleteAll()
 	{
-		foreach (ConfigVars::$fields as $field) {
+		foreach (ConfigDefinition::getFields() as $field) {
 			Core::delOption($field);
 		}
 	}
