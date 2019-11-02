@@ -180,10 +180,9 @@ class Core
 
 		require_once Infos::getPluginDir() . 'admin/AdminSettings.php';
 		$adminSettings = new AdminSettings();
-		add_action('admin_init', [$adminSettings, 'initSettings']); // TODO: only call initSettings when needed
+		add_action('admin_init', [$adminSettings, 'initSettings']);
 
 		// option update actions
-		$this->loader->addAction('update_option', $adminSettings, 'updateOption', 10, 3);
 		$this->loader->addAction('updated_option', $adminSettings, 'updatedOption', 10, 3);
 	}
 

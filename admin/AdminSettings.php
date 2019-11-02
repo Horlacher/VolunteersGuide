@@ -25,19 +25,8 @@ class AdminSettings
 		MapConfig::resetCache();
 	}
 
-	/*
-	public function updateOption($option_name, $old_value, $value)
-	{
-		if (substr($option_name, 0, 7) !== 'volunG_') {
-			return;
-		}
-		$this->initSettings();
-	}
-	*/
 	public function pageSettings()
 	{
-		//$this->initSettings();
-
 		$tabs       = [
 			'General',
 			'World Map',
