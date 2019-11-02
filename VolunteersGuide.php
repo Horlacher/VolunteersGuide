@@ -18,7 +18,7 @@ namespace VolunteersGuide;
  * Plugin Name:       The Volunteer's Guide
  * Plugin URI:        https://github.com/Horlacher/VolunteersGuide
  * Description:       Helps volunteers to find an international workcamp of the Alliance network directly on your WordPress website.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            Fabian Horlacher
  * Author URI:        https://www.horlacher.be/
  * GitHub Plugin URI: https://github.com/Horlacher/VolunteersGuide
@@ -38,7 +38,7 @@ if (!defined('WPINC')) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('volunteersGuide_VERSION', '1.0.0');
+define('volunteersGuide_VERSION', '1.0.1');
 
 /**
  * The code that runs during plugin activation.
