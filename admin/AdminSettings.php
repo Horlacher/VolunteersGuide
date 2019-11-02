@@ -125,6 +125,7 @@ class AdminSettings
 		$this->setupFields();
 		$this->setupSections();
 	}
+
 	protected function setupFields()
 	{
 		$sections = ConfigDefinition::getSections();
@@ -134,21 +135,22 @@ class AdminSettings
 			$page      = $sections[$field['section']]['page'];
 			$id        = Core::getWpId($field['uid']);
 			$fieldType = isset($field['type']) ? $field['type'] : null;
+			$default   = isset($field['default']) ? ['default' => $field['default']] : [];
 			switch ($fieldType) {
 				case 'mapContinent':
 					add_settings_field($id, $field['label'], $callback, $page, $field['section'], $field);
-					register_setting($page, $id);
-					register_setting($page, $id . Config::GLUE_PART . Config::PART_STRENGTH);
+					register_setting($page, $id, $default);
+					register_setting($page, $id . Config::GLUE_PART . Config::PART_STRENGTH, ['default' => 100]);
 					break;
 				case 'mapCountry':
 					add_settings_field($id, $field['label'], $callback, $page, $field['section'], $field);
-					register_setting($page, $id);
+					register_setting($page, $id, $default);
 					register_setting($page, $id . Config::GLUE_PART . Config::PART_PAGE);
 					register_setting($page, $id . Config::GLUE_PART . Config::PART_URL);
 					break;
 				default:
 					add_settings_field($id, $field['label'], $callback, $page, $field['section'], $field);
-					register_setting($page, $id);
+					register_setting($page, $id, $default);
 					break;
 			}
 		}
