@@ -6,14 +6,10 @@ class ConfigDefinition
 {
 	protected static $fieldsCache = null;
 	protected static $sections = [
-		'base'            => [
-			'title' => 'Base settings',
-			'page'  => 'volunGFields0',
-		],
 		'plato'           => [
 			'title' => 'PLATO',
 			'page'  => 'volunGFields0',
-			'sub'   => 'I you don\'t know about PLATO, this plugin wo\'t be of use for you.',
+			'sub'   => 'I you don\'t know about PLATO, this plugin won\'t be of use for you.',
 		],
 		'mapBase'         => [
 			'title' => 'Map settings',
@@ -112,15 +108,6 @@ class ConfigDefinition
 			return self::$fieldsCache;
 		}
 		$fields   = self::$fields;
-		$fields[] = [
-			'uid'          => 'button_default_text',
-			'label'        => 'Project button - default text',
-			'section'      => 'base',
-			'type'         => 'text',
-			'default'      => __('Apply here!', 'volunG'),
-			'supplemental' => 'If you don\'t specify a label for a project button, this text will be used',
-		];
-
 		$allMapContinents = Countries::getAllMapContinents();
 		foreach ($allMapContinents as $codeLong) {
 			$fields[] = [

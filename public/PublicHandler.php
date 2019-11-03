@@ -109,14 +109,14 @@ class PublicHandler
 		// normalize attribute keys, lowercase
 		$atts = array_change_key_case((array)$atts, CASE_LOWER);
 		if (!isset($atts['code'])) {
-			return __('Shortcode must include the attribute "code" with the plato project code as value');
+			return __('Shortcode must include the attribute "code" with the plato project code as value', 'volunG');
 		}
 
 		$projCode   = sanitize_text_field($atts['code']);
 		$platoOrgId = Config::getValue('platoOrgId');
 		$content    = $content
 			? sanitize_text_field($content)
-			: sanitize_text_field(Config::getValue('button_default_text'));
+			: sanitize_text_field(__('Apply here!', 'volunG'));
 
 		ob_start();
 		include Infos::getPluginDir() . 'public/partials/projectButton.php';

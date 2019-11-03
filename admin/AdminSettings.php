@@ -19,7 +19,7 @@ class AdminSettings
 		if (substr($option_name, 0, 7) !== 'volunG_') {
 			return;
 		}
-		if ($option_name == Core::getWpId('button_default_text') || $option_name == Core::getWpId('inlineConfig')) {
+		if ($option_name == Core::getWpId('inlineConfig')) {
 			return;
 		}
 		MapConfig::resetCache();
