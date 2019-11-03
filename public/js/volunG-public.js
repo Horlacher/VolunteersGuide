@@ -79,21 +79,11 @@ class volunG_continentMap {
 		this.loadMapWorld();
 	}
 
-	/*
-	getCountryColors() {
-		const self = this;
-		let countryColors = {};
-		Object.keys(this.countries).forEach((key, index) => {
-			countryColors[key] = self.countries[key].strength;
-		}, this.countries);
-		return countryColors;
-	}*/
-
 	getCountryColors() {
 		const self = this;
 		var countryColors = {};
 		self.mapCountries.forEach(function (key) {
-			countryColors[key] = (typeof self.countries[key] === 'undefined') ? 0 : self.countries[key].strength;
+			countryColors[key] = (typeof self.countries[key] === 'undefined') ? 0 : self.countries[key].intensity;
 		});
 		return countryColors;
 	}

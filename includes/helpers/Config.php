@@ -4,10 +4,10 @@ namespace VolunteersGuide;
 
 class Config
 {
-	const GLUE_PART     = '_';
-	const PART_PAGE     = 'page';
-	const PART_URL      = 'url';
-	const PART_STRENGTH = 'strength';
+	const GLUE_PART      = '_';
+	const PART_PAGE      = 'page';
+	const PART_URL       = 'url';
+	const PART_INTENSITY = 'intensity';
 
 	/**
 	 * @param $id      string

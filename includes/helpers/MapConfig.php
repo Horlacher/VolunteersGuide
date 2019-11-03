@@ -114,7 +114,7 @@ class MapConfig
 			if (!$continentEnabled) {
 				continue;
 			}
-			$continents .= '"' . $code . '": ' . Config::getValue('continent_' . $code, Config::PART_STRENGTH) . ',';
+			$continents .= '"' . $code . '": ' . Config::getValue('continent_' . $code, Config::PART_INTENSITY) . ',';
 		}
 		$continents = '"continents":{' . substr($continents, 0, -1) . '},';
 
@@ -128,7 +128,7 @@ class MapConfig
 			}
 			$countries .= '"' . $country . '":{';
 			$countries .= '"name":"' . Countries::getCountryName($country, $locale) . '",';
-			$countries .= '"strength":' . intval(Config::getValue('country_' . $country, Config::PART_STRENGTH)) . ',';
+			$countries .= '"intensity":' . intval(Config::getValue('country_' . $country, Config::PART_INTENSITY)) . ',';
 			switch ($countryMode) {
 				case '':
 					continue;

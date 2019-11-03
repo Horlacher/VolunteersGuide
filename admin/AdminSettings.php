@@ -129,11 +129,12 @@ class AdminSettings
 				case 'mapContinent':
 					add_settings_field($id, $field['label'], $callback, $page, $field['section'], $field);
 					register_setting($page, $id, $default);
-					register_setting($page, $id . Config::GLUE_PART . Config::PART_STRENGTH, ['default' => 100]);
+					register_setting($page, $id . Config::GLUE_PART . Config::PART_INTENSITY, ['default' => 100]);
 					break;
 				case 'mapCountry':
 					add_settings_field($id, $field['label'], $callback, $page, $field['section'], $field);
 					register_setting($page, $id, $default);
+					register_setting($page, $id . Config::GLUE_PART . Config::PART_INTENSITY, ['default' => 100]);
 					register_setting($page, $id . Config::GLUE_PART . Config::PART_PAGE);
 					register_setting($page, $id . Config::GLUE_PART . Config::PART_URL);
 					break;
@@ -186,12 +187,12 @@ class AdminSettings
 			case 'mapContinent':
 				$value = Config::getValue($uid);
 				$this->createInputCheckBox($wpid, $value);
-				$valueStrength = Config::getValue($uid, Config::PART_STRENGTH);
+				$valueIntensity = Config::getValue($uid, Config::PART_INTENSITY);
 				printf(
 					'<input name="%1$s" id="%1$s" type="number" placeholder="%2$s" value="%3$s" min="0" max="100" size="5" />',
-					$wpid . Config::GLUE_PART . Config::PART_STRENGTH,
+					$wpid . Config::GLUE_PART . Config::PART_INTENSITY,
 					'Visibility (percent)',
-					$valueStrength
+					$valueIntensity
 				);
 				break;
 			case 'mapCountry':
@@ -205,12 +206,12 @@ class AdminSettings
 				echo '</div>';
 				echo '<div class="details">';
 				echo '<br/> ';
-				$valueStrength = Config::getValue($uid, Config::PART_STRENGTH);
+				$valueIntensity = Config::getValue($uid, Config::PART_INTENSITY);
 				printf(
 					'<input name="%1$s" id="%1$s" type="number" placeholder="%2$s" value="%3$s" min="0" max="100" />',
-					$wpid . Config::GLUE_PART . Config::PART_STRENGTH,
+					$wpid . Config::GLUE_PART . Config::PART_INTENSITY,
 					'Visibility (percent)',
-					$valueStrength
+					$valueIntensity
 				);
 				$valuePage = Config::getValue($uid, Config::PART_PAGE);
 				$args      = [

@@ -25,9 +25,9 @@ class ConfigDefinition
 			'sub'   => 'Set the colors of the continents on the map',
 		],
 		'continents'      => [
-			'title' => 'Enable Continents (and set color strength)',
+			'title' => 'Enable Continents (and set color intensity)',
 			'page'  => 'volunGFields1',
-			'sub'   => 'Enable map zoom in when a user clicks on the continent. Set the color strength in percent.',
+			'sub'   => 'Enable map zoom in when a user clicks on the continent. Set the color intensity in percent.',
 		],
 		'countryColors'   => [
 			'title' => 'Countries colors',
@@ -36,7 +36,7 @@ class ConfigDefinition
 		'countries'       => [
 			'title' => 'Enable Countries',
 			'page'  => 'volunGFields2',
-			'sub'   => 'Set what will be shown when a user clicks on the country on the map and set the color strength in percent. "disabled" will always have minimum (zero) strength.',
+			'sub'   => 'Set what will be shown when a user clicks on the country on the map and set the color intensity in percent. "disabled" will always have minimum (zero) intensity.',
 		],
 	];
 	protected static $fields = [
@@ -56,14 +56,14 @@ class ConfigDefinition
 		],
 		[
 			'uid'          => 'colorContinent1',
-			'label'        => 'Color weak',
+			'label'        => 'Color weak intensity',
 			'section'      => 'continentColors',
 			'type'         => 'colorpicker',
 			'supplemental' => '',
 		],
 		[
 			'uid'          => 'colorContinent2',
-			'label'        => 'Color strong',
+			'label'        => 'Color strong intensity',
 			'section'      => 'continentColors',
 			'type'         => 'colorpicker',
 			'supplemental' => '',
@@ -76,13 +76,13 @@ class ConfigDefinition
 		],
 		[
 			'uid'     => 'colorCountry1',
-			'label'   => 'Color weak',
+			'label'   => 'Color weak intensity',
 			'section' => 'countryColors',
 			'type'    => 'colorpicker',
 		],
 		[
 			'uid'     => 'colorCountry2',
-			'label'   => 'Color strong',
+			'label'   => 'Color strong intensity',
 			'section' => 'countryColors',
 			'type'    => 'colorpicker',
 		],
