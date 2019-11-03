@@ -84,7 +84,7 @@ class Countries
 
 	public static function getCountryNames($format = 'php', $locale = null, $echo = null)
 	{
-		$locale = $locale ?: Infos::getUserLanguage(true);
+		$locale = $locale ?: Infos::getUserLanguage();
 		if (isset(self::$countryNames[$format][$locale])) {
 			return self::$countryNames[$format][$locale];
 		}
@@ -100,7 +100,8 @@ class Countries
 		$dirBase = Infos::getPluginDir() . 'libs' . $ds . 'composer' . $ds . 'umpirsky' . $ds . 'country-list' . $ds . 'data' . $ds;
 		$dir     = $dirBase . $locale;
 		if (!is_dir($dir)) {
-			$dir = $dirBase . Config::getValue('default_language');
+			$defaultLanguage = 'en';
+			$dir = $dirBase . $defaultLanguage;
 		}
 		$path = $dir . $ds . 'country.' . $format;
 		if ($echo) {
