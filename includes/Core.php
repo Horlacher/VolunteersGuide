@@ -33,16 +33,6 @@ class Core
 {
 
 	/**
-	 * The loader that's responsible for maintaining and registering all hooks that power
-	 * the plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      Loader $loader Maintains and registers all hooks for the plugin.
-	 */
-	protected $loader;
-
-	/**
 	 * The unique identifier of this plugin.
 	 *
 	 * @since    1.0.0
@@ -77,14 +67,6 @@ class Core
 			$this->version = '1.0.0';
 		}
 		$this->pluginName = 'VolunteersGuide';
-
-		$this->loadDependencies();
-		$this->setLocale();
-		if (is_admin()) {
-			$this->defineAdminHooks();
-		}
-		$this->definePublicHooks();
-		$this->defineShortcodes();
 	}
 
 	/**
@@ -110,7 +92,7 @@ class Core
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once $pluginDir . 'includes/Loader.php';
+		require_once $pluginDir . 'includes/helpers/Loader.php';
 
 		/**
 		 * The helper classes
@@ -142,8 +124,6 @@ class Core
 		 * side of the site.
 		 */
 		require_once $pluginDir . 'public/PublicHandler.php';
-
-		$this->loader = new Loader();
 	}
 
 	/**
@@ -159,7 +139,7 @@ class Core
 	{
 		$plugin_i18n = new i18n();
 
-		$this->loader->addAction('plugins_loaded', $plugin_i18n, 'loadPluginTextdomain');
+		Loader::addAction('plugins_loaded', $plugin_i18n, 'loadPluginTextdomain');
 	}
 
 	/**
@@ -173,17 +153,16 @@ class Core
 	{
 		$pluginAdmin = new Admin($this->getPluginName(), $this->getVersion());
 
-		$this->loader->addAction('admin_enqueue_scripts', $pluginAdmin, 'enqueueStyles');
-		$this->loader->addAction('admin_enqueue_scripts', $pluginAdmin, 'enqueueScripts');
-		$this->loader->addAction('admin_menu', $pluginAdmin, 'setupAdminMenu');
-
+		Loader::addAction('admin_enqueue_scripts', $pluginAdmin, 'enqueueStyles');
+		Loader::addAction('admin_enqueue_scripts', $pluginAdmin, 'enqueueScripts');
+		Loader::addAction('admin_menu', $pluginAdmin, 'setupAdminMenu');
 
 		require_once Infos::getPluginDir() . 'admin/AdminSettings.php';
 		$adminSettings = new AdminSettings();
 		add_action('admin_init', [$adminSettings, 'initSettings']);
 
 		// option update actions
-		$this->loader->addAction('updated_option', $adminSettings, 'updatedOption', 10, 3);
+		Loader::addAction('updated_option', $adminSettings, 'updatedOption', 10, 3);
 	}
 
 	/**
@@ -195,15 +174,14 @@ class Core
 	 */
 	private function definePublicHooks()
 	{
-		$plugin_public = new PublicHandler($this->getPluginName(), $this->getVersion());
+		$pluginPublic = new PublicHandler($this->getPluginName(), $this->getVersion());
 
-		$this->loader->addAction('public_enqueue_styles', $plugin_public, 'enqueueStyles');
-		$this->loader->addAction('public_enqueue_scripts', $plugin_public, 'enqueueScripts');
-		$this->loader->addAction('public_define_posttype', $plugin_public, 'definePosttype');
+		Loader::addAction('public_enqueue_styles', $pluginPublic, 'enqueueStyles');
+		Loader::addAction('public_enqueue_scripts', $pluginPublic, 'enqueueScripts');
+		Loader::addAction('public_define_posttype', $pluginPublic, 'definePosttype');
 
 		// AJAX
-		$this->loader->addAction('wp_ajax_volunG_MapConfig', $plugin_public, 'echoMapConfig');
-		$this->loader->addAction('wp_ajax_nopriv_volunG_MapConfig', $plugin_public, 'echoMapConfig');
+		Loader::addAjaxPublic('volunG_MapConfig', $pluginPublic, 'echoMapConfig');
 	}
 
 	/**
@@ -215,10 +193,10 @@ class Core
 	 */
 	private function defineShortcodes()
 	{
-		$plugin_public = new PublicHandler($this->getPluginName(), $this->getVersion());
-		add_shortcode('volung_projectbutton', [$plugin_public, 'shortcode_projectButton',]);
-		add_shortcode('volung_searchform', [$plugin_public, 'shortcode_searchForm',]);
-		add_shortcode('volung_worldmap', [$plugin_public, 'shortcode_worldMap',]);
+		$pluginPublic = new PublicHandler($this->getPluginName(), $this->getVersion());
+		Loader::addShortcode('volung_projectbutton', $pluginPublic, 'shortcode_projectButton');
+		Loader::addShortcode('volung_searchform', $pluginPublic, 'shortcode_searchForm');
+		Loader::addShortcode('volung_worldmap', $pluginPublic, 'shortcode_worldMap');
 	}
 
 	/**
@@ -228,7 +206,13 @@ class Core
 	 */
 	public function run()
 	{
-		$this->loader->run();
+		$this->loadDependencies();
+		$this->setLocale();
+		if (is_admin()) {
+			$this->defineAdminHooks();
+		}
+		$this->definePublicHooks();
+		$this->defineShortcodes();
 	}
 
 	/**
@@ -241,17 +225,6 @@ class Core
 	public function getPluginName()
 	{
 		return $this->pluginName;
-	}
-
-	/**
-	 * The reference to the class that orchestrates the hooks with the plugin.
-	 *
-	 * @return    Loader    Orchestrates the hooks of the plugin.
-	 * @since     1.0.0
-	 */
-	public function getLoader()
-	{
-		return $this->loader;
 	}
 
 	/**
@@ -312,21 +285,6 @@ class Core
 	public static function delOption($id)
 	{
 		return delete_option(Core::getWpId($id));
-	}
-
-	public static function createNonce($action = -1)
-	{
-		return wp_create_nonce($action);
-	}
-
-	public static function checkNonce()
-	{
-		$actionName = isset($_REQUEST['action']) ? sanitize_text_field($_REQUEST['action']) : '';
-		if (
-			!isset($_REQUEST['_wpnonce'])
-			|| !wp_verify_nonce($_REQUEST['_wpnonce'], $actionName)) {
-			wp_die('Sorry, your nonce did not verify.');
-		}
 	}
 
 	static function showError($error, $statusCode = null)
