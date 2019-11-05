@@ -20,6 +20,7 @@ function showRelativeOnVal($containers, check, showHideSel, value, invert) {
 		showHideEl($showHide, isIn($(this).find(check).filter(':checked').val(), value), invert);
 	});
 }
+
 function hideRelativeOnVal($containers, check, showHideSel, value) {
 	showRelativeOnVal($containers, check, showHideSel, value, true);
 }
@@ -41,18 +42,16 @@ function hideOnVal($check, $showHide, value) {
 	showOnVal($check, $showHide, value, true)
 }
 
-function hideOnChecked($check, $showHide) {
+function showOnChecked($check, $showHide, invert) {
+	var invert = (invert !== undefined) ? invert : false;
 	$check.change(function () {
-		showHideEl($showHide, !$(this).is(':checked'));
+		showHideEl($showHide, $(this).is(':checked'), invert);
 	});
-	showHideEl($showHide, !$check.is(':checked'));
+	showHideEl($showHide, $check.is(':checked'), invert);
 }
 
-function showOnChecked($check, $showHide) {
-	$check.change(function () {
-		showHideEl($showHide, $(this).is(':checked'));
-	});
-	showHideEl($showHide, $check.is(':checked'));
+function hideOnChecked($check, $showHide) {
+	showOnVal($check, $showHide, true);
 }
 
 function isIn(needle, haystack) {
@@ -79,7 +78,7 @@ function showHideEl($els, show, invert) {
 }
 
 jQuery(document).ready(function ($) {
-	$('.color-preview-box').click(function(){
+	$('.color-preview-box').click(function () {
 		$(this).closest('td').find('.color-picker').wheelColorPicker('show');
 	});
 });
