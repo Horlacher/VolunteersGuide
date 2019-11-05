@@ -1,11 +1,10 @@
 # The Volunteer's Guide
 
-We use Github to maintain our Code. If you want to use this WordPress Plugin, install it from the plugin repository in the WordPress backend of your website.
+We use Github to maintain our Code. If you want to use [this WordPress plugin](https://wordpress.org/plugins/volunteers-guide/), install it from the plugin repository in the WordPress backend of your website.
 
 ## Description
 
-Integrates features of PLATO for [The Alliance](http://www.alliance-network.eu/) into a Wordpress page. This plugin is only an integration for PLATO, but not related  
-
+Integrates features of PLATO for [The Alliance](http://www.alliance-network.eu/) into a Wordpress page. 
 ## Requirements
 
 * PHP >= 7.0
@@ -27,6 +26,7 @@ Please install the following build dependencies:
 * [Python](https://www.python.org/)
 * [Ruby](https://www.ruby-lang.org/)
 * [node.js](https://nodejs.org/) (tested with v8.10.0)
+* [composer](https://getcomposer.org/)
 * [gettext](https://packages.ubuntu.com/bionic/gettext)
 
 Download required packages:
@@ -34,6 +34,7 @@ Download required packages:
 ```
 npm install
 npm install grunt-cli sass -g
+composer install
 ```
 
 ### Generate assets
