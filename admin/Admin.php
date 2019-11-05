@@ -73,17 +73,6 @@ class Admin
 	public function enqueueScripts()
 	{
 		wp_enqueue_script($this->pluginName . '_admin', plugin_dir_url(__FILE__) . 'js/volunG-admin.min.js', ['jquery'], $this->version, false);
-
-		/*
-		wp_enqueue_media();
-		$localJsArr = [
-			'uploader' => [
-				'title' => 'Select signature sheet',
-				'text'  => 'Select',
-			],
-		];
-		wp_localize_script($this->pluginName . '_admin', 'volunGAdmin', $localJsArr);
-		*/
 	}
 
 	public function setupAdminMenu()
@@ -113,52 +102,5 @@ class Admin
 		$menuTitle = 'Settings';
 		$callback = [$adminSettings, 'pageSettings'];
 		add_submenu_page($slug, $menuTitle, $menuTitle, $capabilitySettings, $slug . 'Settings', $callback);
-	}
-
-	static protected $messages = [];
-	static protected $errors = [];
-
-	/**
-	 * Add a message.
-	 *
-	 * @param string $text Message.
-	 */
-	public static function addMessage($text)
-	{
-		self::$messages[] = $text;
-	}
-
-	/**
-	 * Add an error.
-	 *
-	 * @param string $text Message.
-	 */
-	public static function addError($text)
-	{
-		self::$errors[] = $text;
-	}
-
-	/**
-	 * Output messages + errors.
-	 */
-	public static function showMessages()
-	{
-		if (count(self::$errors) > 0) {
-			foreach (self::$errors as $error) {
-				echo '<div id="message" class="error inline"><p><strong>' . esc_html($error) . '</strong></p></div>';
-			}
-		} elseif (count(self::$messages) > 0) {
-			foreach (self::$messages as $message) {
-				echo '<div id="message" class="updated inline"><p><strong>' . esc_html($message) . '</strong></p></div>';
-			}
-		}
-	}
-
-	public static function checkAccess($capability)
-	{
-		Core::checkNonce();
-		if (!current_user_can($capability)) {
-			wp_die(esc_html__('You are not allowed to access this page.', 'wp-control'));
-		}
 	}
 }

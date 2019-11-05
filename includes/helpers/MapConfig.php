@@ -100,8 +100,8 @@ class MapConfig
 
 		// colors
 		$colors = '"colors":{' .
-				  '"continent":["#' . Config::getValue('colorContinent1') . '", "' . Config::getValue('colorContinent2') . '"],' .
-				  '"country":["#' . Config::getValue('colorCountry1') . '", "' . Config::getValue('colorCountry2') . '"],' .
+				  '"continent":["' . Config::getValue('colorContinent1') . '", "' . Config::getValue('colorContinent2') . '"],' .
+				  '"country":["' . Config::getValue('colorCountry1') . '", "' . Config::getValue('colorCountry2') . '"],' .
 				  '"continentHover":"' . Config::getValue('colorCountryHover') . '",' .
 				  '"countryHover":"' . Config::getValue('colorCountryHover') . '"' .
 				  '},';
