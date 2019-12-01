@@ -162,6 +162,8 @@ class volunG_continentMap {
 			onRegionClick: (event, code) => {
 				self.showCountry(code);
 			},
+			zoomOnScroll: true,
+			zoomButtons : true,
 		});
 	}
 
@@ -194,7 +196,9 @@ class volunG_continentMap {
 			},
 			onRegionClick: (event, code) => {
 				self.loadMapContinent(code);
-			}
+			},
+			zoomOnScroll: false,
+			zoomButtons : false,
 		});
 	}
 }
