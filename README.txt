@@ -49,3 +49,5 @@ No, this plugin was initially built for the swiss Alliance member [Workcamp Swit
 
 = 1.0 =
 * First release
+
+[](http://coderisk.com/wp/plugin/volunteers-guide/RIPS-7kkWrho0-D)
