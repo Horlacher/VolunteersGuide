@@ -160,6 +160,7 @@ class AdminSettings
 			case 'input':
 			case 'file':
 			case 'number':
+			default:
 				$value = str_replace('"', '&quot;', Config::getValue($uid));
 				printf(
 					'<input name="%1$s" id="%1$s" type="%2$s" placeholder="%3$s" value="%4$s" size="40" />',

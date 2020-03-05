@@ -91,7 +91,7 @@ class Countries
 		//$availableFormats = ['csv', 'html', 'json', 'mysql.sql', 'php', 'postgresql.sql', 'sqlite.sql', 'txt', 'xliff', 'xml', 'yaml',];
 		$availableFormats = ['php',];
 		if (!in_array($format, $availableFormats)) {
-			Core::showError('getCountries: invalid format "' . $format . '" was requested', 500);
+			Core::errorDie('getCountries: invalid format "' . $format . '" was requested', 500);
 		}
 		if ($echo === null) {
 			$echo = ($format === 'json');

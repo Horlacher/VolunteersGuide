@@ -131,6 +131,7 @@ class MapConfig
 			$countries .= '"intensity":' . intval(Config::getValue('country_' . $country, Config::PART_INTENSITY)) . ',';
 			switch ($countryMode) {
 				case '':
+				default:
 					continue;
 					break;
 				case 'plato':

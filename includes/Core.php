@@ -287,40 +287,34 @@ class Core
 		return delete_option(Core::getWpId($id));
 	}
 
-	static function showError($error, $statusCode = null)
+	static function errorDie($error, $statusCode)
 	{
 		$isError = !(substr($statusCode, 0, 1) == 2 || substr($statusCode, 0, 1) == 3);
-		$string  = self::logMessage($statusCode . ' - ' . $error, $isError ? 'error' : 'info');
-		if (WP_DEBUG) {
-			echo $string;
+		self::logMessage($statusCode . ' - ' . $error, $isError ? 'error' : 'info');
+		http_response_code($statusCode);
+		switch ($statusCode) {
+			default:
+				$msg = 'unknown error';
+				break;
+			case 400:
+				$msg = 'Invalid form values received';
+				break;
+			case 404:
+				$msg = 'Resource not found';
+				break;
+			case 405:
+				$msg = 'Requested resource does not support this operation';
+				break;
+			case 500:
+				$msg = 'Internal server error';
+				break;
 		}
-		if ($statusCode !== null) {
-			http_response_code($statusCode);
-			switch ($statusCode) {
-				default:
-					$msg = 'unknown error';
-					break;
-				case 400:
-					$msg = 'Invalid form values received';
-					break;
-				case 404:
-					$msg = 'Resource not found';
-					break;
-				case 405:
-					$msg = 'Requested resource does not support this operation';
-					break;
-				case 500:
-					$msg = 'Internal server error';
-					break;
-			}
-			wp_die($msg, $statusCode);
-		}
-		return;
+		wp_die($msg, $statusCode);
 	}
 
 	static function logMessage($message, $level = 'error', $type = null)
 	{
-		if (!WP_DEBUG) {
+		if (!WP_DEBUG_LOG && !WP_DEBUG) {
 			return;
 		}
 		$trace  = debug_backtrace();
@@ -328,18 +322,20 @@ class Core
 		if ($source['function'] == 'showError' && $source['function'] == 'VolunteersGuide\Core') {
 			$source = $trace[2];
 		}
-		$date   = date('Y-m-d G:i:s', time());
+		$date = date('Y-m-d G:i:s', time());
 		$string = $date . ' [' . $level . '] ' . $source['file'] . ':' . $source['line'] . "\n" . $message . "\n";
 
 		$fn = Infos::getPluginDir() . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'debug.VolunteersGuide'
 			  . ($type ? '.' . $type : '') . '.php';
 		if (!file_exists($fn)) {
-			$string = '<?php exit;' . "\n" . $string;
+			$string = '<?php die(\'silenzio\') ?>' . "\n" . $string;
 		}
 		$fp = fopen($fn, 'a');
 		fputs($fp, $string);
 		fclose($fp);
-		return $string;
+		if (WP_DEBUG_DISPLAY) {
+			echo $string;
+		}
 	}
 
 	public static function getPluginDir()
